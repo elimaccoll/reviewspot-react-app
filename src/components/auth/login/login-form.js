@@ -3,7 +3,7 @@ import React from "react";
 const LoginForm = () => {
     return (
         <>
-            <div className="form-group">
+            <div className="form-group mb-2">
                 <label htmlFor="login-username" className="input-label">
                     Username:
                 </label>
@@ -14,7 +14,7 @@ const LoginForm = () => {
                     placeholder="Username"
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group mb-3">
                 <label htmlFor="login-password" className="input-label">
                     Password:
                 </label>
@@ -26,6 +26,7 @@ const LoginForm = () => {
                     className="form-control"
                 />
             </div>
+            <button className="btn btn-success">Log in</button>
         </>
     );
 };

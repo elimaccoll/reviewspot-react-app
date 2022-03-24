@@ -3,10 +3,10 @@ import LoginForm from "./login-form";
 
 const Login = () => {
     return (
-        <>
-            <h1 className="text-success">ReviewSpot</h1>
+        <div className="d-flex flex-column">
+            <h1 className="text-success text-center">ReviewSpot</h1>
             <LoginForm />
-        </>
+        </div>
     );
 };
 
