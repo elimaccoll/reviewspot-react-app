@@ -12,7 +12,7 @@ const LoginForm = () => {
                         placeholder="Username"
                     />
                     <label htmlFor="login-username" className="input-label">
-                        Username:
+                        Username
                     </label>
                 </div>
             </div>
@@ -25,7 +25,7 @@ const LoginForm = () => {
                         className="form-control"
                     />
                     <label htmlFor="login-password" className="input-label">
-                        Password:
+                        Password
                     </label>
                 </div>
             </div>
