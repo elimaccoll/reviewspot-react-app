@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from "moment";
 
 const AlbumListItem = ({album}) => {
     let artists = "";
@@ -16,10 +17,12 @@ const AlbumListItem = ({album}) => {
                 <div className="col-8">
                     <div className="fw-bolder">{album.name}</div>
                     <div>{artists}</div>
-                    <div>Release Date: {album.release_date}</div>
+                    <div>Release Date: <span className="text-muted">{moment(album.release_date).format("MMMM Do, YYYY")}</span></div>
+                    {/* Rating */}
                     <div className="progress">
                         <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style={{"width": `${album.popularity}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    </div>    
+                    
                 </div>
             </div>
         </li>
