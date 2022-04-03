@@ -22,16 +22,20 @@ const AlbumListItem = ({ album }) => {
                             {moment(album.release_date).format("MMMM Do, YYYY")}
                         </span>
                     </div>
-                    {/* Rating */}
-                    <div className="progress">
-                        <div
-                            className="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                            role="progressbar"
-                            style={{ width: `${album.popularity}%` }}
-                            aria-valuenow="25"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                        ></div>
+                    <div className="d-flex flex-row w-100 align-items-center">
+                        <div className="me-2">Rating:</div>
+                        <div className="w-50">
+                            <div className="progress">
+                                <div
+                                    className="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                    role="progressbar"
+                                    style={{ width: `${album.popularity}%` }}
+                                    aria-valuenow="25"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                ></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
