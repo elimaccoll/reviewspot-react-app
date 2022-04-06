@@ -1,6 +1,6 @@
 import React from "react";
 import AlbumInfo from "./album-info";
-import ReviewList from "./review-list";
+import ReviewList from "../reviews/review-list";
 
 const AlbumPage = ({ album }) => {
     return (
