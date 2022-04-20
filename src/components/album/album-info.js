@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { createArtistsString } from "../helpers/album";
+import CreateReviewModal from "../reviews/create-review-modal";
 
 const AlbumInfo = ({ album }) => {
+  const [modalShow, setModalShow] = useState(false);
+  const hideModal = () => setModalShow(false);
+  const showModal = () => setModalShow(true);
   return (
     <div className="bg-dark p-2">
+      <CreateReviewModal show={modalShow} onHide={() => hideModal()} />
       <div className="row mb-2">
         <div className="col-3">
           <img
@@ -18,7 +23,14 @@ const AlbumInfo = ({ album }) => {
         </div>
         <div className="col-3">
           <div className="d-flex flex-column justify-content-end">
-            <button className="btn btn-block btn-info">Write Review</button>
+            <button
+              className="btn btn-block btn-info"
+              onClick={() => showModal()}
+              data-bs-toggle="modal"
+              data-bs-target="#create-review-modal"
+            >
+              Write Review
+            </button>
             <div className="rs-rating-bar p-2">
               <div className="progress">
                 <div
