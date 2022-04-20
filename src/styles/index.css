@@ -16,3 +16,7 @@
 .rs-rating-bar {
   width: 192px;
 }
+
+.clickable {
+  cursor: pointer;
+}

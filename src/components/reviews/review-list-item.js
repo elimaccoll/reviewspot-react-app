@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 const ReviewListItem = ({ review }) => {
+  const dispatch = useDispatch();
+  const deleteReviewHandler = () => {
+    dispatch({ type: "delete-review", review: review });
+  };
+  const likeReviewHandler = () => {
+    dispatch({ type: "like-review", review: review });
+  };
   return (
     <li className="list-group-item">
       <div className="row">
@@ -12,9 +20,17 @@ const ReviewListItem = ({ review }) => {
           />
         </div>
         <div className="col-9 col-md-10 col-xl-11">
-          <div>
-            <span className="text-muted me-1">Review by</span>
-            <span>{review.user_name}</span>
+          <div className="d-flex justify-content-between">
+            <div>
+              <span className="text-muted me-1">Review by</span>
+              <span>{review.username}</span>
+            </div>
+            <div>
+              <i
+                className="clickable fa-solid fa-close"
+                onClick={() => deleteReviewHandler()}
+              />
+            </div>
           </div>
 
           <div className="w-50">
@@ -33,9 +49,13 @@ const ReviewListItem = ({ review }) => {
           <div>{review.review}</div>
           <div>
             <span className="me-2">
-              <i className="text-danger fa-solid fa-heart"></i> {review.likes}
+              <i
+                className="text-danger clickable fa-solid fa-heart me-1"
+                onClick={() => likeReviewHandler()}
+              ></i>
+              {review.likes}
             </span>
-            <span>Replies: {review.replies}</span>
+            <span>Replies: {review.replies.length}</span>
           </div>
         </div>
       </div>

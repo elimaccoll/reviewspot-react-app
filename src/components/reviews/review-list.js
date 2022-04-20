@@ -1,8 +1,9 @@
 import React from "react";
 import ReviewListItem from "./review-list-item";
-import reviews from "../data/reviews.json";
+import { useSelector } from "react-redux";
 
 const ReviewList = () => {
+  const reviews = useSelector((state) => state.reviews);
   return (
     <ul className="list-group mt-2">
       {reviews.map((review) => {
