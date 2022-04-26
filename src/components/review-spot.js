@@ -1,6 +1,5 @@
 import React from "react";
-import AlbumPage from "./album/album-page";
-import albums from "./data/albums.json";
+import { Outlet } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
@@ -11,8 +10,8 @@ const store = createStore(reducer);
 const ReviewSpot = () => {
   return (
     <Provider store={store}>
-      <div className="container mt-2">
-        <AlbumPage album={albums[0]} />
+      <div className="row mt-2">
+        <Outlet />
       </div>
     </Provider>
   );

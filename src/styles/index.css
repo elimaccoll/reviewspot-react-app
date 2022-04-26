@@ -20,3 +20,7 @@
 .clickable {
   cursor: pointer;
 }
+
+.review-list-item {
+  text-decoration: none;
+}

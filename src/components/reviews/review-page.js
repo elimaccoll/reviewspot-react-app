@@ -1,17 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import reviews from "../data/reviews.json";
 
-const ReviewListItem = ({ review }) => {
-  const dispatch = useDispatch();
-  const deleteReviewHandler = () => {
-    dispatch({ type: "delete-review", review: review });
-  };
-  const likeReviewHandler = () => {
-    dispatch({ type: "like-review", review: review });
-  };
+const ReviewPage = () => {
+  const { rid } = useParams();
+  // TODO: get review with corresponding id
+  const review = reviews[rid];
   return (
-    <Link className="review-list-item " to={`review/${review._id}`}>
+    <div>
+      <h1>Review Page for Review #{rid}</h1>
       <li className="list-group-item">
         <div className="row">
           <div className="col-3 col-md-2 col-xl-1">
@@ -30,7 +27,7 @@ const ReviewListItem = ({ review }) => {
               <div>
                 <i
                   className="clickable fa-solid fa-close"
-                  onClick={() => deleteReviewHandler()}
+                  onClick={() => console.log("close") /*deleteReviewHandler()*/}
                 />
               </div>
             </div>
@@ -53,7 +50,7 @@ const ReviewListItem = ({ review }) => {
               <span className="me-2">
                 <i
                   className="text-danger clickable fa-solid fa-heart me-1"
-                  onClick={() => likeReviewHandler()}
+                  onClick={() => console.log("like") /*likeReviewHandler()*/}
                 ></i>
                 {review.likes}
               </span>
@@ -62,7 +59,7 @@ const ReviewListItem = ({ review }) => {
           </div>
         </div>
       </li>
-    </Link>
+    </div>
   );
 };
-export default ReviewListItem;
+export default ReviewPage;
