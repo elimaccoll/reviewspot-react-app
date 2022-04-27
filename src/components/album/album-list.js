@@ -1,14 +1,15 @@
 import React from "react";
-import AlbumListItem from "./album-list-item";
 import albums from "../data/albums.json";
+import AlbumListItem from "./album-list-item";
 
 const AlbumList = () => {
+  // TODO: Conditionally choose albums to render depending on if logged in or not
   return (
-    <ul className="list-group">
+    <div className="list-group mt-3">
       {albums.map((album) => {
         return <AlbumListItem album={album} />;
       })}
-    </ul>
+    </div>
   );
 };
 export default AlbumList;

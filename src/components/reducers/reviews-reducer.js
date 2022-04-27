@@ -9,13 +9,13 @@ const reviewsReducer = (state = reviews, action) => {
         rating: action.rating,
         replies: [],
         likes: 0,
-        _id: new Date().getTime() + "",
+        _id: reviews.length, // new Date().getTime() + "",
         username: "get from user",
         profile_pic: `https://picsum.photos/200/300?random=${
           Math.random() * 1000 + 5
         }`,
       };
-      console.log(newReview);
+      reviews.push(newReview);
       return [newReview, ...state];
     case "delete-review":
       return state.filter((review) => review._id !== action.review._id);

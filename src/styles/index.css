@@ -21,6 +21,7 @@
   cursor: pointer;
 }
 
-.review-list-item {
+.review-list-item,
+.album-list-item {
   text-decoration: none;
 }

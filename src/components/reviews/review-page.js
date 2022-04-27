@@ -11,7 +11,7 @@ const ReviewPage = () => {
       <h1>Review Page for Review #{rid}</h1>
       <li className="list-group-item">
         <div className="row">
-          <div className="col-3 col-md-2 col-xl-1">
+          <div className="col-3 col-md-2 col-xl-1 d-flex justify-content-center align-items-center">
             <img
               src={review.profile_pic}
               className="rs-img-128 img-fluid"
