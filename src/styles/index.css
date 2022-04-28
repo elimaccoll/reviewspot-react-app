@@ -30,3 +30,7 @@
 .rs-profile-pic {
   cursor: pointer;
 }
+
+.rs-dark {
+  color: black;
+}

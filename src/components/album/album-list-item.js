@@ -9,7 +9,7 @@ const AlbumListItem = ({ album }) => {
   // TODO: Replace link path with album id
   const albumID = albums.indexOf(album);
   return (
-    <Link className="album-list-item " to={`album/${albumID}`}>
+    <Link className="album-list-item " to={`/album/${albumID}`}>
       <div className="list-group-item">
         <div className="row mb-2">
           <div className="col-3 d-flex justify-content-center align-items-center">

@@ -3,19 +3,26 @@ import { createArtistsString } from "../helpers/album";
 import CreateReviewModal from "../reviews/create-review-modal";
 import AlbumStats from "./album-stats";
 import AlbumRatingBar from "./album-rating-bar";
+import LoginModal from "../auth/login/login-modal";
 
 const AlbumInfo = ({ album }) => {
   // TODO: replace with logged in state
-  const loggedIn = true;
-  const [modalShow, setModalShow] = useState(false);
-  const hideModal = () => setModalShow(false);
-  const showModal = () => setModalShow(true);
+  const loggedIn = false;
+  const [showReview, setShowReview] = useState(false);
+  const hideReviewModal = () => setShowReview(false);
+  const showReviewModal = () => setShowReview(true);
+
+  const [showLogin, setShowLogin] = useState(false);
+  const hideLoginModal = () => setShowLogin(false);
+  const showLoginModal = () => setShowLogin(true);
 
   const WriteReviewButton = () => {
     return (
       <button
         className="btn btn-block btn-info"
-        onClick={() => showModal()}
+        onClick={() => {
+          loggedIn ? showReviewModal() : showLoginModal();
+        }}
         data-bs-toggle="modal"
         data-bs-target="#create-review-modal"
       >
@@ -23,9 +30,11 @@ const AlbumInfo = ({ album }) => {
       </button>
     );
   };
+
   return (
     <div className="bg-dark p-2">
-      <CreateReviewModal show={modalShow} onHide={() => hideModal()} />
+      <CreateReviewModal show={showReview} onHide={() => hideReviewModal()} />
+      <LoginModal show={showLogin} onHide={() => hideLoginModal()} />
       <div className="row mb-2">
         <div className="col-5 col-md-3 d-flex justify-content-center align-items-center">
           <img

@@ -2,8 +2,8 @@ import React from "react";
 
 const RegisterForm = () => {
   return (
-    <>
-      <div className="form-group mb-3">
+    <div className="d-flex flex-column align-items-center">
+      <div className="form-group mb-3 w-50">
         <div className="form-floating mb3">
           <input
             type="username"
@@ -16,7 +16,7 @@ const RegisterForm = () => {
           </label>
         </div>
       </div>
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 w-50">
         <div className="form-floating mb3">
           <input
             type="password"
@@ -29,7 +29,7 @@ const RegisterForm = () => {
           </label>
         </div>
       </div>
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 w-50">
         <div className="form-floating mb3">
           <input
             type="password"
@@ -42,8 +42,8 @@ const RegisterForm = () => {
           </label>
         </div>
       </div>
-      <button className="btn btn-success">Register</button>
-    </>
+      <button className="btn btn-success w-25">Register</button>
+    </div>
   );
 };
 

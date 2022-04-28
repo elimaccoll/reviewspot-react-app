@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
 
@@ -49,15 +49,15 @@ const CreateReviewModal = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-between">
-        <Button className="btn btn-danger" onClick={() => handleClose()}>
+        <button className="btn btn-danger" onClick={() => handleClose()}>
           Close
-        </Button>
-        <Button
+        </button>
+        <button
           className="btn btn-success"
           onClick={() => createReviewHandler()}
         >
           Create
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

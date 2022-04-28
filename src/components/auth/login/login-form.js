@@ -2,8 +2,8 @@ import React from "react";
 
 const LoginForm = () => {
   return (
-    <>
-      <div className="form-group mb-3">
+    <div className="d-flex flex-column align-items-center">
+      <div className="form-group mb-3 w-50">
         <div className="form-floating mb3">
           <input
             type="username"
@@ -16,7 +16,7 @@ const LoginForm = () => {
           </label>
         </div>
       </div>
-      <div className="form-group mb-3">
+      <div className="form-group mb-3 w-50">
         <div className="form-floating mb3">
           <input
             type="password"
@@ -29,8 +29,8 @@ const LoginForm = () => {
           </label>
         </div>
       </div>
-      <button className="btn btn-success">Log in</button>
-    </>
+      <button className="btn btn-success w-25">Log in</button>
+    </div>
   );
 };
 

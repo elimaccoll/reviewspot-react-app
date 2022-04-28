@@ -15,7 +15,16 @@ const ProfilePage = () => {
           />
         </div>
         <div className="col-9">
-          <h1>Profile Page for User #{uid}</h1>
+          <h1>Username for User #{uid}</h1>
+          <div className="text-muted">Joined: Date of account creation</div>
+          <div>Number of Reviews: XX</div>
+          <hr />
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+            accusantium dolores, cupiditate dolor nulla minima illum ea ut,
+            commodi reprehenderit eius, enim ipsam? Facilis quam repellendus
+            inventore numquam, deleniti minima.
+          </div>
         </div>
       </div>
       <ReviewList />

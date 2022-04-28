@@ -5,8 +5,9 @@ import AlbumList from "../album/album-list";
 const SearchResults = () => {
   const { search } = useParams();
   // TODO: use 'search' to get albums to list
+
   return (
-    <div className="row">
+    <div className="mt-2">
       <AlbumList />
     </div>
   );

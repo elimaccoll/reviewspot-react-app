@@ -102,8 +102,8 @@ const ReviewPage = () => {
         <div className="d-flex justify-content-end">{WriteCommentButton()}</div>
       </li>
       <CommentList comments={review.comments} />
-      <Link to={`/album/${aid}`}>
-        <h1>Back to Album</h1>
+      <Link className="text-center" to={`/album/${aid}`}>
+        <h2 className="mt-3">Back to Album</h2>
       </Link>
     </div>
   );
