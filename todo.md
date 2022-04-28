@@ -15,3 +15,7 @@ CommentListItem (used on ReviewPage)
 Navbar
 
 - Placement of Logout button (move to ProfilePage??)
+
+RatingBar
+
+- XX / 10 text wraps as screen shrinks

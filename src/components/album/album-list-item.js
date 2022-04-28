@@ -1,6 +1,6 @@
 import React from "react";
 import { createArtistsString } from "../helpers/album";
-import AlbumRatingBar from "./album-rating-bar";
+import RatingBar from "../rating-bar/rating-bar";
 import AlbumStats from "./album-stats";
 import { Link } from "react-router-dom";
 import albums from "../data/albums.json";
@@ -24,11 +24,11 @@ const AlbumListItem = ({ album }) => {
             <div className="h2">{createArtistsString(album.artists)}</div>
             <AlbumStats album={album} />
             <div className="d-block d-lg-none">
-              <AlbumRatingBar album={album} />
+              <RatingBar rating={album.popularity} />
             </div>
           </div>
           <div className="col-3 d-none d-lg-block">
-            <AlbumRatingBar album={album} />
+            <RatingBar rating={album.popularity} />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createArtistsString } from "../helpers/album";
 import CreateReviewModal from "../reviews/create-review-modal";
 import AlbumStats from "./album-stats";
-import AlbumRatingBar from "./album-rating-bar";
+import RatingBar from "../rating-bar/rating-bar";
 import LoginModal from "../auth/login/login-modal";
 
 const AlbumInfo = ({ album }) => {
@@ -47,7 +47,7 @@ const AlbumInfo = ({ album }) => {
           <div className="h1">{album.name}</div>
           <div className="h2">{createArtistsString(album.artists)}</div>
           <AlbumStats album={album} />
-          <AlbumRatingBar album={album} />
+          <RatingBar rating={album.popularity} />
           <div className="d-md-none d-flex justify-content-end">
             {WriteReviewButton()}
           </div>

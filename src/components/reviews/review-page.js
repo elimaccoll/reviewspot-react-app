@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import ReviewStats from "./review-stats";
 import CommentList from "../comments/comment-list";
 import CreateCommentModal from "../comments/create-comment-modal";
-import CreateReviewModal from "../reviews/create-review-modal";
+import RatingBar from "../rating-bar/rating-bar";
 
 const ReviewPage = () => {
   const { aid, rid } = useParams();
@@ -81,20 +81,7 @@ const ReviewPage = () => {
                 />
               </div>
             </div>
-
-            <div className="w-50">
-              <div className="progress">
-                <div
-                  className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                  role="progressbar"
-                  style={{ width: `${review && review.rating}%` }}
-                  aria-valuenow="25"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-
+            <RatingBar rating={review.rating} />
             <div>{review && review.review}</div>
             <ReviewStats review={review} linkComments={false} />
           </div>
