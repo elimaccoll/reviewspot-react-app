@@ -22,7 +22,8 @@ const ReviewPage = () => {
 
   // TODO: Get author of review
   const author = { _id: "0" };
-  // TODO: render 'edit' button if user is author
+  // TODO: render edit and delete button if user is author | or moderator ??
+  const loggedIn = true;
   const userIsAuthor = true;
 
   const navigate = useNavigate();
@@ -70,23 +71,32 @@ const ReviewPage = () => {
                 <span className="text-muted me-1">Review by</span>
                 <span>{review && review.username}</span>
               </Link>
-              <div className={`${userIsAuthor ? "d-inline" : "d-none"}`}>
+              <div
+                className={`${
+                  loggedIn && userIsAuthor ? "d-inline" : "d-none"
+                }`}
+              >
                 <i
                   className="clickable fa-solid fa-edit me-3"
                   onClick={() => console.log("Edit review")}
                 />
                 <i
                   className="clickable fa-solid fa-close"
-                  onClick={() => deleteReviewHandler()}
+                  onClick={() => {
+                    if (loggedIn && userIsAuthor) deleteReviewHandler();
+                  }}
                 />
               </div>
             </div>
             <RatingBar rating={review.rating} />
             <div>{review && review.review}</div>
             <ReviewStats review={review} linkComments={false} />
+
+            <div className="d-flex justify-content-end">
+              {WriteCommentButton()}
+            </div>
           </div>
         </div>
-        <div className="d-flex justify-content-end">{WriteCommentButton()}</div>
       </li>
       <CommentList comments={review.comments} />
       <Link className="text-center" to={`/album/${aid}`}>

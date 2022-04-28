@@ -1,7 +1,6 @@
 import React from "react";
 
 const RatingBar = ({ rating }) => {
-  console.log(rating);
   return (
     <div className="d-flex align-items-center">
       <div className="rs-rating-bar me-2">

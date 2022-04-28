@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // TODO: Replace this with actual loggedIn state and user id
-  const loggedIn = true;
+  const loggedIn = false;
   const uid = 0;
 
   const handleLogout = () => {

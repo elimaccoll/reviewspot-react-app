@@ -14,7 +14,8 @@ const CommentListItem = ({ comment }) => {
     profile_pic: "https://picsum.photos/200/300?random=1",
   };
 
-  // TODO: render 'edit' button if user is author
+  // TODO: render edit and delete button if user is author
+  const loggedIn = true;
   const userIsAuthor = true;
 
   const goToUserProfile = () => {
@@ -45,7 +46,9 @@ const CommentListItem = ({ comment }) => {
               <span className="text-muted me-1">Comment by</span>
               <span>{author.username}</span>
             </Link>
-            <div className={`${userIsAuthor ? "d-inline" : "d-none"}`}>
+            <div
+              className={`${loggedIn && userIsAuthor ? "d-inline" : "d-none"}`}
+            >
               <i
                 className="clickable fa-solid fa-edit me-3"
                 onClick={() => console.log("Edit comment")}

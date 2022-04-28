@@ -3,6 +3,14 @@ General
 - Abstract pagination arrows
 - - Pass in prev, next, loadPrev() and loadNext()
 
+ReviewList and AlbumList
+
+- Change them to take in a list of reviews/albums respectively to render
+
+ReviewListItem
+
+- No indication as to what album they are for
+
 ReviewPage
 
 - Ability to edit review/rating
@@ -22,7 +30,7 @@ RatingBar
 
 ProfilePage
 
-- Links to reviews from user profile page (need the album id)
+- Links to reviews from home page and user profile page DONT WORK (need the album id) | make change in ReviewListItem
 - Conditional rendering for moderator
 - Conditional rendering for account owner
 - - delete account, edit bio
@@ -30,3 +38,7 @@ ProfilePage
 EditBioModal
 
 - Connect to state to actually update on profile page
+
+Home
+
+- Should I even render recent comments on small screens
