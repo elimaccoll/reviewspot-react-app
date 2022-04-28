@@ -8,6 +8,9 @@ import Home from "./components/home/home";
 import AlbumPage from "./components/album/album-page";
 import ReviewPage from "./components/reviews/review-page";
 import ProfilePage from "./components/profile/profile-page";
+import Login from "./components/auth/login/login";
+import Register from "./components/auth/register/register";
+import Search from "./components/search/search-results";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Routes>
           <Route path="/" element={<ReviewSpot />}>
             <Route index exact={true} element={<Home />} />
+            <Route path="search/:search" exact={true} element={<Search />} />
+            <Route path="login/" exact={true} element={<Login />} />
+            <Route path="register/" exact={true} element={<Register />} />
             <Route
               path="user/:uid"
               exact={true}

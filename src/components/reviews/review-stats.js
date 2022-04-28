@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-const ReviewStats = ({ review }) => {
+const ReviewStats = ({ review, linkComments = true }) => {
   const dispatch = useDispatch();
 
   const likeReviewHandler = () => {
@@ -16,7 +17,15 @@ const ReviewStats = ({ review }) => {
         ></i>
         {review && review.likes}
       </span>
-      <span>Replies: {review && review.replies.length}</span>
+      <Link
+        className={`review-list-item ${linkComments ? "d-inline" : "d-none"}`}
+        to={`review/${review._id}`}
+      >
+        <span>Comments: {review && review.comments.length}</span>
+      </Link>
+      <span className={`${linkComments ? "d-none" : "d-inline"}`}>
+        Comments: {review && review.comments.length}
+      </span>
     </div>
   );
 };

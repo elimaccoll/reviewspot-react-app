@@ -2,7 +2,7 @@ import React from "react";
 
 const AlbumRatingBar = ({ album }) => {
   return (
-    <div className="d-flex flex-column justify-content-end">
+    <div className="d-flex align-items-center">
       <div className="rs-rating-bar p-2">
         <div className="progress">
           <div
@@ -15,6 +15,7 @@ const AlbumRatingBar = ({ album }) => {
           ></div>
         </div>
       </div>
+      {album.popularity / 10} / 10
     </div>
   );
 };

@@ -8,7 +8,7 @@ const reviewsReducer = (state = reviews, action) => {
       const newReview = {
         review: action.review,
         rating: action.rating,
-        replies: [],
+        comments: [],
         likes: 0,
         _id: newId,
         username: "get from user",
@@ -16,7 +16,7 @@ const reviewsReducer = (state = reviews, action) => {
           Math.random() * 1000 + 5
         }`,
       };
-      reviews.push(newReview);
+      // reviews.push(newReview);
       return [newReview, ...state];
     case "delete-review":
       return state.filter((review) => review._id !== action.review._id);
@@ -27,7 +27,15 @@ const reviewsReducer = (state = reviews, action) => {
         }
         return review;
       });
-    case "reply-to-review":
+    case "comment-on-review":
+      return state.map((review) => {
+        if (review._id === action.reviewId) {
+          review.comments.push(action.comment);
+        }
+        return review;
+      });
+    case "delete-comment":
+      // TODO: No way to identify a comment
       return;
     default:
       return reviews;

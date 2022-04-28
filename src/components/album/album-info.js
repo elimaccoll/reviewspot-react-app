@@ -5,6 +5,8 @@ import AlbumStats from "./album-stats";
 import AlbumRatingBar from "./album-rating-bar";
 
 const AlbumInfo = ({ album }) => {
+  // TODO: replace with logged in state
+  const loggedIn = true;
   const [modalShow, setModalShow] = useState(false);
   const hideModal = () => setModalShow(false);
   const showModal = () => setModalShow(true);
