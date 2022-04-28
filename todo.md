@@ -19,3 +19,14 @@ Navbar
 RatingBar
 
 - XX / 10 text wraps as screen shrinks
+
+ProfilePage
+
+- Links to reviews from user profile page (need the album id)
+- Conditional rendering for moderator
+- Conditional rendering for account owner
+- - delete account, edit bio
+
+EditBioModal
+
+- Connect to state to actually update on profile page

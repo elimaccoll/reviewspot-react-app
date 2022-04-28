@@ -6,6 +6,9 @@ import ReviewStats from "./review-stats";
 const ReviewListItem = ({ review }) => {
   const navigate = useNavigate();
 
+  // TODO: Get album id that this review is for
+  // -- needed for linking to review from pages besides the album page (e.g., user profile page who wrote it)
+
   const goToUserProfile = () => {
     // TODO: Get user id of the profile pic that was clicked
     const uid = 0;
@@ -26,6 +29,7 @@ const ReviewListItem = ({ review }) => {
         <div className="col-9 col-md-10 col-xl-11">
           <div className="d-flex justify-content-between">
             <Link className="review-list-item " to={`review/${review._id}`}>
+              {/*to={`/album/${albumId}/review/${review._id}`}*/}
               <span className="text-muted me-1">Review by</span>
               <span>{review.username}</span>
             </Link>
