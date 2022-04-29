@@ -1,12 +1,9 @@
 import React from "react";
-import ReviewListItem from "./review-list-item";
-import { useSelector } from "react-redux";
+import albums from "../data/albums.json";
+import AlbumListItem from "./album-list-item";
 
-// TODO: Pass in list of review to list (from user or album)
-const ReviewList = () => {
-  // TODO: Currently displaying all reviews for testing
-  const reviews = useSelector((state) => state.reviews);
-
+// TODO: Pass in list of albums to render (home or search)
+const AlbumList = (/* {albums, prev, next} */) => {
   const prev = true; // If previous page
   const next = true; // If next page
 
@@ -18,9 +15,9 @@ const ReviewList = () => {
   };
 
   return (
-    <ul className="list-group mt-2">
-      {reviews.map((review) => {
-        return <ReviewListItem review={review} />;
+    <div className="list-group mt-3">
+      {albums.map((album) => {
+        return <AlbumListItem album={album} />;
       })}
       <div className="bg-light d-flex justify-content-around">
         <i
@@ -40,7 +37,7 @@ const ReviewList = () => {
           }}
         ></i>
       </div>
-    </ul>
+    </div>
   );
 };
-export default ReviewList;
+export default AlbumList;

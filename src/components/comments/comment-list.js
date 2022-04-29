@@ -1,12 +1,7 @@
 import React from "react";
-import ReviewListItem from "./review-list-item";
-import { useSelector } from "react-redux";
+import CommentListItem from "./comment-list-item";
 
-// TODO: Pass in list of review to list (from user or album)
-const ReviewList = () => {
-  // TODO: Currently displaying all reviews for testing
-  const reviews = useSelector((state) => state.reviews);
-
+const CommentList = ({ comments }) => {
   const prev = true; // If previous page
   const next = true; // If next page
 
@@ -19,8 +14,8 @@ const ReviewList = () => {
 
   return (
     <ul className="list-group mt-2">
-      {reviews.map((review) => {
-        return <ReviewListItem review={review} />;
+      {comments.map((comment) => {
+        return <CommentListItem comment={comment} />;
       })}
       <div className="bg-light d-flex justify-content-around">
         <i
@@ -43,4 +38,4 @@ const ReviewList = () => {
     </ul>
   );
 };
-export default ReviewList;
+export default CommentList;

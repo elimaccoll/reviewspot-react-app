@@ -1,62 +1,62 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import RatingBar from "../rating-bar/rating-bar";
+import ReviewStats from "./review-stats";
 
 const ReviewListItem = ({ review }) => {
-  const dispatch = useDispatch();
-  const deleteReviewHandler = () => {
-    dispatch({ type: "delete-review", review: review });
+  const navigate = useNavigate();
+
+  // Conditionally render information displayed if NOT on album page
+  const url = window.location.href;
+  const find = "album";
+  const onAlbumPage = url.match(find);
+
+  // TODO: Get album id that this review is for
+  // -- needed for linking to review from pages besides the album page (e.g., user profile page who wrote it)
+  const album = { _id: 0, title: "Album Title" };
+
+  const goToUserProfile = () => {
+    // TODO: Get user id of the profile pic that was clicked
+    const uid = 0;
+    navigate(`/user/${uid}`);
   };
-  const likeReviewHandler = () => {
-    dispatch({ type: "like-review", review: review });
-  };
+
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-3 col-md-2 col-xl-1">
+        <div
+          className={`col-3 col-md-2 col-xl-1 justify-content-center align-items-center ${
+            !onAlbumPage ? "d-none" : "d-flex"
+          }`}
+        >
           <img
             src={review.profile_pic}
-            className="rs-img-128 img-fluid"
+            className="rs-img-128 img-fluid rs-profile-pic"
             alt="Profile Picture"
+            onClick={() => goToUserProfile()}
           />
         </div>
-        <div className="col-9 col-md-10 col-xl-11">
-          <div className="d-flex justify-content-between">
-            <div>
+        <div
+          className={`${!onAlbumPage ? "col-12" : "col-9 col-md-10 col-xl-11"}`}
+        >
+          <div>
+            <Link className="review-list-item " to={`review/${review._id}`}>
+              {/*to={`/album/${albumId}/review/${review._id}`}*/}
               <span className="text-muted me-1">Review by</span>
               <span>{review.username}</span>
-            </div>
-            <div>
-              <i
-                className="clickable fa-solid fa-close"
-                onClick={() => deleteReviewHandler()}
-              />
-            </div>
+            </Link>
+          </div>
+          <div className={`${onAlbumPage ? "d-none" : "d-block"}`}>
+            <Link className="review-list-item" to={`/album/${album._id}`}>
+              <span className="text-muted">Album: </span>
+              <span>{album.title}</span>
+            </Link>
           </div>
 
-          <div className="w-50">
-            <div className="progress">
-              <div
-                className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                role="progressbar"
-                style={{ width: `${review.rating}%` }}
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
+          <RatingBar rating={review.rating} />
 
           <div>{review.review}</div>
-          <div>
-            <span className="me-2">
-              <i
-                className="text-danger clickable fa-solid fa-heart me-1"
-                onClick={() => likeReviewHandler()}
-              ></i>
-              {review.likes}
-            </span>
-            <span>Replies: {review.replies.length}</span>
-          </div>
+          <ReviewStats review={review} />
         </div>
       </div>
     </li>

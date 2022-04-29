@@ -1,38 +1,38 @@
 [
   {
-    "_id": 1,
+    "_id": "0",
     "username": "Username1",
     "profile_pic": "https://picsum.photos/200/300?random=1",
     "rating": 60,
     "likes": 32,
-    "replies": ["1", "2", "3", "4", "5"],
+    "comments": ["1", "2", "3", "4", "5"],
     "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet lectus proin nibh nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames."
   },
   {
-    "_id": 2,
+    "_id": "1",
     "username": "Username2",
     "profile_pic": "https://picsum.photos/200/300?random=2",
     "rating": 92,
     "likes": 104,
-    "replies": ["1", "2", "3", "4", "5", "6", "7"],
+    "comments": ["1", "2", "3", "4", "5", "6", "7"],
     "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet lectus proin nibh nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames."
   },
   {
-    "_id": 3,
+    "_id": "2",
     "username": "Username3",
     "profile_pic": "https://picsum.photos/200/300?random=3",
     "rating": 35,
     "likes": 4,
-    "replies": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
+    "comments": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
     "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet lectus proin nibh nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames."
   },
   {
-    "_id": 4,
+    "_id": "3",
     "username": "Username4",
     "profile_pic": "https://picsum.photos/200/300?random=4",
     "rating": 100,
     "likes": 20,
-    "replies": ["1", "2", "3"],
+    "comments": ["1", "2", "3"],
     "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id aliquet lectus proin nibh nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames."
   }
 ]

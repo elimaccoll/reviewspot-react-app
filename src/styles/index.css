@@ -20,3 +20,17 @@
 .clickable {
   cursor: pointer;
 }
+
+.review-list-item,
+.album-list-item,
+.comment-list-item {
+  text-decoration: none;
+}
+
+.rs-profile-pic {
+  cursor: pointer;
+}
+
+.rs-dark {
+  color: black;
+}
