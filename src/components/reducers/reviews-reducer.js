@@ -1,5 +1,6 @@
 import reviews from "../data/reviews.json";
 
+// TODO: Update with actions files
 const reviewsReducer = (state = reviews, action) => {
   switch (action.type) {
     case "create-review":

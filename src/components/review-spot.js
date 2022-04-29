@@ -6,6 +6,7 @@ import { combineReducers, createStore } from "redux";
 import reviewsReducer from "./reducers/reviews-reducer";
 import Navbar from "./navbar/navbar";
 
+// TODO: update store contents
 const reducer = combineReducers({ reviews: reviewsReducer });
 const store = createStore(reducer);
 const ReviewSpot = () => {

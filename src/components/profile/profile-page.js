@@ -24,7 +24,7 @@ const ProfilePage = () => {
   const { uid } = useParams();
   return (
     <div className="bg-dark p-2">
-      <div className="row mb-2">
+      <div className="row">
         <EditBioModal show={showBio} onHide={() => hideBioModal()} />
         <div className="col-3 d-flex justify-content-center align-items-center">
           <img

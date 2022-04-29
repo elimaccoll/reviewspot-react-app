@@ -3,6 +3,10 @@ General
 - Abstract pagination arrows
 - - Pass in prev, next, loadPrev() and loadNext()
 
+Actions
+
+- Replace all reducer calls (likeReview, createReview, etc) with action calls
+
 ReviewList and AlbumList
 
 - Change them to take in a list of reviews/albums respectively to render

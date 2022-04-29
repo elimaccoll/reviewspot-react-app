@@ -59,7 +59,8 @@ const CommentListItem = ({ comment }) => {
               />
             </div>
           </div>
-
+          <span className="text-muted me-1">Created at</span>
+          <span>DATE</span>
           <div>{comment}</div>
         </div>
       </div>
