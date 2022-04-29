@@ -1,14 +1,22 @@
-// TODO: Idk if this is how we would do this
-const userReducer = (state, action) => {
+import { BAN_USER, DELETE_USER, EDIT_BIO } from "../../actions/user-actions";
+
+// TODO: remove - for testing
+const user = {
+  bio: "",
+};
+
+// TODO: Idk if this is how we would do this for anything besides bio
+const userReducer = (state = user, action) => {
   switch (action.type) {
-    case "edit-bio":
+    case "EDIT_BIO":
+      state.bio = action.bio;
+      return state;
+    case DELETE_USER:
       return;
-    case "delete-account":
-      return;
-    case "ban-user":
+    case BAN_USER:
       return;
     default:
-      return reviews;
+      return state;
   }
 };
-export default reviewsReducer;
+export default userReducer;

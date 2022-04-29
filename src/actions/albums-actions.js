@@ -1,4 +1,4 @@
-import * as service from "../services/album-services";
+import * as service from "../services/albums-services";
 
 export const FIND_HOME_ALBUMS = "FIND_HOME_ALBUMS";
 export const FIND_SEARCH_ALBUMS = "FIND_SEARCH_ALBUMS";

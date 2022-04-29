@@ -4,6 +4,7 @@ import reviews from "../data/reviews.json";
 const reviewsReducer = (state = reviews, action) => {
   switch (action.type) {
     case "create-review":
+      console.log("create-review");
       // TODO: temporary way of incrementing local reviews -- testing
       const newId = (parseInt(reviews[reviews.length - 1]._id) + 1).toString();
       const newReview = {

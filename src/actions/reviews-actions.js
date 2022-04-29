@@ -1,4 +1,4 @@
-import * as service from "../services/reviews-service";
+import * as service from "../services/reviews-services";
 
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const LIKE_REVIEW = "LIKE_REVIEW";

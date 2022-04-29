@@ -46,3 +46,7 @@ EditBioModal
 Home
 
 - Should I even render recent comments on small screens
+
+Search
+
+- Make it so hitting enter when focused on search bar actually searches

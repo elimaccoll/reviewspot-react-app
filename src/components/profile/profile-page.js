@@ -4,13 +4,14 @@ import ReviewList from "../reviews/review-list";
 import EditBioModal from "./edit-bio-modal";
 
 const ProfilePage = () => {
+  // Modal
   const [showBio, setShowBio] = useState(false);
   const hideBioModal = () => setShowBio(false);
   const showBioModal = () => setShowBio(true);
 
-  // TODO: Get this info from backend
+  // TODO: Get this info from state/backend
   const loggedIn = true;
-  const moderator = true;
+  const moderator = false;
   const owner = true;
 
   const handleBanUser = () => {
@@ -38,12 +39,12 @@ const ProfilePage = () => {
           <div className="text-muted">Joined: Date of account creation</div>
           <div>Number of Reviews: XX</div>
           <hr />
-          <div>
+          <p id="user-bio">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
             accusantium dolores, cupiditate dolor nulla minima illum ea ut,
             commodi reprehenderit eius, enim ipsam? Facilis quam repellendus
             inventore numquam, deleniti minima.
-          </div>
+          </p>
         </div>
       </div>
       <div

@@ -1,7 +1,7 @@
 import {
   FIND_SEARCH_ALBUMS,
   FIND_HOME_ALBUMS,
-} from "../../../actions/albums-actions";
+} from "../../actions/albums-actions";
 
 const albumsReducer = (state = [], action) => {
   switch (action.type) {

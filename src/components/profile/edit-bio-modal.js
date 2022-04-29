@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // TODO: Connect to a reducer to set/update new bio
 const EditBioModal = (props) => {
-  const [bio, setBio] = useState("");
+  const userBio = useSelector((state) => state.user.bio);
 
+  const [bio, setBio] = useState(userBio);
   const dispatch = useDispatch();
-  const editBioHandler = () => {
-    // dispatch({ type: "create-review", review: review, rating: rating });
+  const handleEditBio = () => {
+    dispatch({ type: "EDIT_BIO", bio: bio });
     setBio("");
     props.onHide();
+  };
+
+  const handleConfirm = () => {
+    document.getElementById("user-bio").textContent = bio;
+    handleEditBio();
   };
 
   const handleClose = () => {
@@ -40,7 +46,7 @@ const EditBioModal = (props) => {
         <button className="btn btn-danger" onClick={() => handleClose()}>
           Close
         </button>
-        <button className="btn btn-success" onClick={() => editBioHandler()}>
+        <button className="btn btn-success" onClick={() => handleConfirm()}>
           Confirm
         </button>
       </Modal.Footer>
