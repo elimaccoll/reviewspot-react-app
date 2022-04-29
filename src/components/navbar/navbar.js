@@ -1,10 +1,11 @@
 import React from "react";
-import SearchBar from "../search/search";
+import SearchBar from "../search/search-bar";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // TODO: Replace this with actual loggedIn state and user id
-  const loggedIn = false;
+  const loggedIn = true;
+  const moderator = true;
   const uid = 0;
 
   const handleLogout = () => {
@@ -23,6 +24,15 @@ const Navbar = () => {
             <li className="nav-item">
               <a className="nav-link text-black active" href="/">
                 Home
+              </a>
+            </li>
+            <li
+              className={`nav-item ${
+                loggedIn && moderator ? "d-inline" : "d-none"
+              }`}
+            >
+              <a className="nav-link text-black active" href="/reports/">
+                Reports
               </a>
             </li>
           </ul>

@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import ReviewStats from "./review-stats";
 import CommentList from "../comments/comment-list";
 import CreateCommentModal from "../comments/create-comment-modal";
+import CreateReportModal from "../report/create-report-modal";
 import RatingBar from "../rating-bar/rating-bar";
 
 const ReviewPage = () => {
@@ -11,6 +12,10 @@ const ReviewPage = () => {
   const [modalShow, setModalShow] = useState(false);
   const hideModal = () => setModalShow(false);
   const showModal = () => setModalShow(true);
+
+  const [reportShow, setReportShow] = useState(false);
+  const hideReport = () => setReportShow(false);
+  const showReport = () => setReportShow(true);
 
   // TODO: get review with corresponding id from db
   const reviews = useSelector((state) => state.reviews);
@@ -24,7 +29,8 @@ const ReviewPage = () => {
   const author = { _id: "0" };
   // TODO: render edit and delete button if user is author | or moderator ??
   const loggedIn = true;
-  const userIsAuthor = true;
+  const userIsAuthor = false;
+  const moderator = false;
 
   const navigate = useNavigate();
   const goToUserProfile = () => {
@@ -55,6 +61,7 @@ const ReviewPage = () => {
   return (
     <div>
       <CreateCommentModal show={modalShow} onHide={() => hideModal()} />
+      <CreateReportModal show={reportShow} onHide={() => hideReport()} />
       <li className="list-group-item">
         <div className="row">
           <div className="col-3 col-md-2 col-xl-1 d-flex justify-content-center align-items-center">
@@ -71,21 +78,32 @@ const ReviewPage = () => {
                 <span className="text-muted me-1">Review by</span>
                 <span>{review && review.username}</span>
               </Link>
-              <div
-                className={`${
-                  loggedIn && userIsAuthor ? "d-inline" : "d-none"
-                }`}
-              >
+              <div>
                 <i
-                  className="clickable fa-solid fa-edit me-3"
+                  className={`clickable fa-solid fa-edit me-3 ${
+                    loggedIn && userIsAuthor ? "d-inline" : "d-none"
+                  }`}
                   onClick={() => console.log("Edit review")}
                 />
                 <i
-                  className="clickable fa-solid fa-close"
+                  className={`clickable fa-solid fa-close me-3 ${
+                    loggedIn && (userIsAuthor || moderator)
+                      ? "d-inline"
+                      : "d-none"
+                  }`}
                   onClick={() => {
-                    if (loggedIn && userIsAuthor) deleteReviewHandler();
+                    if (loggedIn && (userIsAuthor || moderator))
+                      deleteReviewHandler();
                   }}
                 />
+                <i
+                  className={`clickable fa-solid fa-flag me-3 ${
+                    loggedIn ? "d-inline" : "d-none"
+                  }`}
+                  data-bs-toggle="modal"
+                  data-bs-target="#create-report-modal"
+                  onClick={() => showReport()}
+                ></i>
               </div>
             </div>
             <RatingBar rating={review.rating} />

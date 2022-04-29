@@ -7,7 +7,7 @@ import LoginModal from "../auth/login/login-modal";
 
 const AlbumInfo = ({ album }) => {
   // TODO: replace with logged in state
-  const loggedIn = false;
+  const loggedIn = true;
   const [showReview, setShowReview] = useState(false);
   const hideReviewModal = () => setShowReview(false);
   const showReviewModal = () => setShowReview(true);
@@ -38,13 +38,13 @@ const AlbumInfo = ({ album }) => {
       <div className="row mb-2">
         <div className="col-5 col-md-3 d-flex justify-content-center align-items-center">
           <img
-            src={album.images[0].url}
+            src={album && album.images[0].url}
             alt="Album cover."
             className="img-fluid rounded"
           />
         </div>
         <div className="col-7 col-md-6">
-          <div className="h1">{album.name}</div>
+          <div className="h1">{album && album.name}</div>
           <div className="h2">{createArtistsString(album.artists)}</div>
           <AlbumStats album={album} />
           <RatingBar rating={album.popularity} />

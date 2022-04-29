@@ -7,8 +7,11 @@ const ReviewList = () => {
   // TODO: Currently displaying all reviews for testing
   const reviews = useSelector((state) => state.reviews);
 
+  const loggedIn = true;
   const prev = true; // If previous page
   const next = true; // If next page
+
+  const reviewsColHeading = loggedIn ? "Top Reviews" : "Your Recent Reviews";
 
   const loadNext = () => {
     return;
@@ -18,29 +21,14 @@ const ReviewList = () => {
   };
 
   return (
-    <ul className="list-group mt-2">
-      {reviews.map((review) => {
-        return <ReviewListItem review={review} />;
-      })}
-      <div className="bg-light d-flex justify-content-around">
-        <i
-          className={`rs-dark clickable fas fa-arrow-left fa-2x ${
-            prev ? "d-flex" : "d-none"
-          }`}
-          onClick={() => {
-            loadPrev();
-          }}
-        ></i>
-        <i
-          className={`rs-dark clickable fas fa-arrow-right fa-2x ${
-            next ? "d-flex" : "d-none"
-          }`}
-          onClick={() => {
-            loadNext();
-          }}
-        ></i>
-      </div>
-    </ul>
+    <div>
+      {/* <h3 className="text-center">{reviewsColHeading}</h3> */}
+      <ul className="list-group mt-2">
+        {reviews.map((review) => {
+          return <ReviewListItem review={review} />;
+        })}
+      </ul>
+    </div>
   );
 };
 export default ReviewList;

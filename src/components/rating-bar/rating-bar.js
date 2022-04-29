@@ -15,7 +15,7 @@ const RatingBar = ({ rating }) => {
           ></div>
         </div>
       </div>
-      {rating / 10} / 10
+      <div> {rating / 10} / 10</div>
     </div>
   );
 };

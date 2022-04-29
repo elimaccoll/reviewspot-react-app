@@ -11,6 +11,7 @@ import ProfilePage from "./components/profile/profile-page";
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
 import Search from "./components/search/search-results";
+import ReportDashboard from "./components/report/report-dashboard";
 
 function App() {
   return (
@@ -22,14 +23,19 @@ function App() {
             <Route path="search/:search" exact={true} element={<Search />} />
             <Route path="login/" exact={true} element={<Login />} />
             <Route path="register/" exact={true} element={<Register />} />
+            <Route path="reports/" exact={true} element={<ReportDashboard />} />
             <Route
               path="user/:uid"
               exact={true}
               element={<ProfilePage />}
             ></Route>
-            <Route path="album/:aid/" exact={true} element={<AlbumPage />} />
             <Route
-              path="album/:aid/review/:rid/"
+              path="album/:albumId/"
+              exact={true}
+              element={<AlbumPage />}
+            />
+            <Route
+              path="album/:albumId/review/:rid/"
               exact={true}
               element={<ReviewPage />}
             />

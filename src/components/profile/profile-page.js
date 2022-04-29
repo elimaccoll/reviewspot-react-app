@@ -11,7 +11,7 @@ const ProfilePage = () => {
 
   // TODO: Get this info from state/backend
   const loggedIn = true;
-  const moderator = false;
+  const moderator = true;
   const owner = true;
 
   const handleBanUser = () => {
@@ -64,17 +64,17 @@ const ProfilePage = () => {
         >
           Edit Bio
         </button>
-        <button
+        {/* <button
           className={`btn btn-block btn-danger ms-2 ${
             loggedIn && owner ? "d-block" : "d-none"
           }`}
           onClick={() => handleDeleteAccount()}
         >
           Delete Account
-        </button>
+        </button> */}
         <button
           className={`btn btn-block btn-danger ms-2 ${
-            loggedIn && moderator ? "d-block" : "d-none"
+            loggedIn && moderator && !owner ? "d-block" : "d-none"
           }`}
           onClick={() => handleBanUser()}
         >

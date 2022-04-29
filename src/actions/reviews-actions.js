@@ -53,8 +53,8 @@ export const findHomeReviews = async (dispatch) => {
   });
 };
 
-export const findAlbumReviews = async (dispatch) => {
-  const reviews = await service.findAlbumReviews();
+export const findAlbumReviews = async (dispatch, albumId) => {
+  const reviews = await service.findAlbumReviews(albumId);
   dispatch({
     type: FIND_ALBUM_REVIEWS,
     reviews,

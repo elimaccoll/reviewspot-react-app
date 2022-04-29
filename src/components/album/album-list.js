@@ -3,7 +3,7 @@ import albums from "../data/albums.json";
 import AlbumListItem from "./album-list-item";
 
 // TODO: Pass in list of albums to render (home or search)
-const AlbumList = (/* {albums, prev, next} */) => {
+const AlbumList = ({ albums } /*, prev, next} */) => {
   const prev = true; // If previous page
   const next = true; // If next page
 
@@ -15,7 +15,7 @@ const AlbumList = (/* {albums, prev, next} */) => {
   };
 
   return (
-    <div className="list-group mt-3">
+    <ul className="list-group mt-3">
       {albums.map((album) => {
         return <AlbumListItem album={album} />;
       })}
@@ -37,7 +37,7 @@ const AlbumList = (/* {albums, prev, next} */) => {
           }}
         ></i>
       </div>
-    </div>
+    </ul>
   );
 };
 export default AlbumList;
