@@ -18,14 +18,14 @@ function App() {
     <Router>
       <div className="container">
         <Routes>
-          <Route path="/" element={<ReviewSpot />}>
+          <Route path="/" exact={true} element={<ReviewSpot />}>
             <Route index exact={true} element={<Home />} />
             <Route path="search/:search" exact={true} element={<Search />} />
             <Route path="login/" exact={true} element={<Login />} />
             <Route path="register/" exact={true} element={<Register />} />
             <Route path="reports/" exact={true} element={<ReportDashboard />} />
             <Route
-              path="user/:uid"
+              path="user/:userId/"
               exact={true}
               element={<ProfilePage />}
             ></Route>
@@ -35,7 +35,7 @@ function App() {
               element={<AlbumPage />}
             />
             <Route
-              path="album/:albumId/review/:rid/"
+              path="album/:albumId/review/:reviewId/"
               exact={true}
               element={<ReviewPage />}
             />

@@ -9,11 +9,15 @@ export const findAlbum = async (albumId) => {
 
 // Albums to display on home page
 export const findHomeAlbums = async () => {
-  const response = await axios.get(`${API_BASE}/`);
+  const response = await axios.get(`${API_BASE}newReleases`, {
+    params: { limit: 10, offset: 0 },
+  });
   return response.data;
 };
 
 export const findSearchAlbums = async (searchTerm) => {
-  const response = await axios.get(`${API_BASE}/search/${searchTerm}`);
+  const response = await axios.get(`${API_BASE}search`, {
+    params: { q: searchTerm, limit: 10, offset: 0 },
+  });
   return response.data;
 };

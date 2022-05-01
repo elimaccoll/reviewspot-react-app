@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
+import { createReview } from "../../actions/reviews-actions";
+import { useParams } from "react-router-dom";
 
 const CreateReviewModal = (props) => {
+  const { albumId } = useParams();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const handleRating = (userRating) => {
@@ -11,7 +14,8 @@ const CreateReviewModal = (props) => {
   };
   const dispatch = useDispatch();
   const createReviewHandler = () => {
-    dispatch({ type: "create-review", review: review, rating: rating });
+    // dispatch({ type: "create-review", review: review, rating: rating });
+    createReview(dispatch, review, rating, albumId);
     setReview("");
     props.onHide();
   };

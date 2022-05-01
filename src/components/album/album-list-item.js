@@ -5,30 +5,29 @@ import AlbumStats from "./album-stats";
 import { Link } from "react-router-dom";
 
 const AlbumListItem = ({ album }) => {
-  const albumInfo = album.album;
-  const albumID = albumInfo.id;
+  const albumId = album.id;
+  const numReviews = album && album.numReviews;
 
   return (
-    <Link className="album-list-item " to={`/album/${albumID}`}>
+    <Link className="album-list-item " to={`/album/${albumId}`}>
       <div className="list-group-item">
         <div className="row mb-2">
           <div className="col-3 d-flex justify-content-center align-items-center">
             <img
-              src={albumInfo.images[0].url}
+              src={album && album.images[0].url}
               alt="Album cover."
               className="img-fluid rounded"
             />
           </div>
-          <div className="col-9 col-lg-6">
-            <div className="h1">{albumInfo.name}</div>
-            <div className="h2">{createArtistsString(albumInfo.artists)}</div>
-            <AlbumStats album={albumInfo} />
-            <div className="d-block d-lg-none">
-              <RatingBar rating={albumInfo.popularity} />
+          <div className="col-9">
+            <div className="h2">{album && album.name}</div>
+            <div className="h3">
+              {album && createArtistsString(album.artists)}
             </div>
-          </div>
-          <div className="col-3 d-none d-lg-block">
-            <RatingBar rating={albumInfo.popularity} />
+            <AlbumStats album={album} numReviews={numReviews} />
+            <div className="d-block">
+              <RatingBar rating={album.avgRating} />
+            </div>
           </div>
         </div>
       </div>

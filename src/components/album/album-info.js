@@ -4,10 +4,15 @@ import CreateReviewModal from "../reviews/create-review-modal";
 import AlbumStats from "./album-stats";
 import RatingBar from "../rating-bar/rating-bar";
 import LoginModal from "../auth/login/login-modal";
+import { useSelector } from "react-redux";
+import ReviewList from "../reviews/review-list";
 
-const AlbumInfo = ({ album }) => {
-  // TODO: replace with logged in state
-  const loggedIn = true;
+const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
+  const albumInfo = album.album;
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
+  const userReview = alreadyReviewed ? [alreadyReviewed] : [];
+
   const [showReview, setShowReview] = useState(false);
   const hideReviewModal = () => setShowReview(false);
   const showReviewModal = () => setShowReview(true);
@@ -26,29 +31,37 @@ const AlbumInfo = ({ album }) => {
         data-bs-toggle="modal"
         data-bs-target="#create-review-modal"
       >
-        Write Review
+        {alreadyReviewed ? "Edit Review" : "Write Review"}
       </button>
     );
   };
 
+  console.log(numReviews);
+
   return (
     <div className="bg-dark p-2">
       <CreateReviewModal show={showReview} onHide={() => hideReviewModal()} />
-      <LoginModal show={showLogin} onHide={() => hideLoginModal()} />
+      <LoginModal
+        show={showLogin}
+        onHide={() => hideLoginModal()}
+        purpose={"Write a Review"}
+      />
       <div className="row mb-2">
         <div className="col-5 col-md-3 d-flex justify-content-center align-items-center">
           <img
-            src={album && album.images[0].url}
+            src={albumInfo && albumInfo.images[0].url}
             alt="Album cover."
             className="img-fluid rounded"
           />
         </div>
         <div className="col-7 col-md-6">
-          <div className="h1">{album && album.name}</div>
-          <div className="h2">{createArtistsString(album.artists)}</div>
-          <AlbumStats album={album} />
-          <RatingBar rating={album.popularity} />
-          <div className="d-md-none d-flex justify-content-end">
+          <div className="h1">{albumInfo && albumInfo.name}</div>
+          <div className="h2">
+            {albumInfo && createArtistsString(albumInfo.artists)}
+          </div>
+          <AlbumStats album={albumInfo} numReviews={numReviews} />
+          <RatingBar rating={albumInfo && albumInfo.popularity} />
+          <div className={"d-md-none d-flex justify-content-end"}>
             {WriteReviewButton()}
           </div>
         </div>
@@ -56,6 +69,7 @@ const AlbumInfo = ({ album }) => {
           {WriteReviewButton()}
         </div>
       </div>
+      <ReviewList reviews={{ reviews: userReview }} />
     </div>
   );
 };

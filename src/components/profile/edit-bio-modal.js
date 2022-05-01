@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { editBio } from "../../actions/user-actions";
 
-// TODO: Connect to a reducer to set/update new bio
 const EditBioModal = (props) => {
+  const { userId } = useParams();
   const userBio = useSelector((state) => state.user.bio);
 
   const [bio, setBio] = useState(userBio);
   const dispatch = useDispatch();
   const handleEditBio = () => {
-    dispatch({ type: "EDIT_BIO", bio: bio });
+    editBio(dispatch, userId, bio);
     setBio("");
     props.onHide();
   };

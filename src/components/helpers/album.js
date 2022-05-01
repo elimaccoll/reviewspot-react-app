@@ -6,3 +6,11 @@ export const createArtistsString = (artists) => {
   });
   return artists_str;
 };
+
+export const userAlreadyReviewedAlbum = (reviews, userId) => {
+  for (let i = 0; i < reviews.length; i++) {
+    const review = reviews[i];
+    if (review.authorInfo.authorId === userId) return review;
+  }
+  return null;
+};

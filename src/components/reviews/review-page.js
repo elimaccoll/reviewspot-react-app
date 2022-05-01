@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ReviewStats from "./review-stats";
@@ -6,9 +6,17 @@ import CommentList from "../comments/comment-list";
 import CreateCommentModal from "../comments/create-comment-modal";
 import CreateReportModal from "../report/create-report-modal";
 import RatingBar from "../rating-bar/rating-bar";
+import {
+  findReviewById,
+  deleteReview,
+  findReviewComments,
+} from "../../actions/reviews-actions";
+import LoginModal from "../auth/login/login-modal";
 
 const ReviewPage = () => {
-  const { aid, rid } = useParams();
+  const { albumId, reviewId } = useParams();
+
+  // Write comment modal
   const [modalShow, setModalShow] = useState(false);
   const hideModal = () => setModalShow(false);
   const showModal = () => setModalShow(true);
@@ -17,39 +25,51 @@ const ReviewPage = () => {
   const hideReport = () => setReportShow(false);
   const showReport = () => setReportShow(true);
 
-  // TODO: get review with corresponding id from db
-  const reviews = useSelector((state) => state.reviews);
-  const review = reviews.filter((r) => {
-    if (r._id === rid) {
-      return r;
-    }
-  })[0];
+  const [showLogin, setShowLogin] = useState(false);
+  const hideLoginModal = () => setShowLogin(false);
+  const showLoginModal = () => setShowLogin(true);
 
-  // TODO: Get author of review
-  const author = { _id: "0" };
-  // TODO: render edit and delete button if user is author | or moderator ??
-  const loggedIn = true;
-  const userIsAuthor = false;
-  const moderator = false;
+  const dispatch = useDispatch();
+
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
+  const moderator = userInfo.role === "moderator";
+
+  const reviewState = useSelector((state) => state.reviews);
+  useEffect(() => findReviewById(dispatch, reviewId, albumId), []);
+  const review = reviewState.length !== 0 ? reviewState : null;
+  const albumData = review && review.albumData;
+  const reviewInfo = review && review.review;
+  const authorInfo = reviewInfo && reviewInfo.authorInfo;
+  const userIsAuthor = authorInfo && authorInfo.authorId === userInfo._id;
+
+  const commentsInfo = useSelector((state) => state.comments);
+  useEffect(() => findReviewComments(dispatch, reviewId, albumId), []);
+  const comments = commentsInfo && commentsInfo.comments;
+  const numComments = comments && comments.length;
+  console.log(review);
+
+  // TODO: Pull pagination info for comments
+  // console.log(review);
+  // console.log(comments);
 
   const navigate = useNavigate();
   const goToUserProfile = () => {
-    // TODO: Get user id of the profile pic that was clicked
-    const uid = 0;
-    navigate(`/user/${uid}`);
+    navigate(`/user/${authorInfo.authorId}`);
   };
 
-  const dispatch = useDispatch();
   const deleteReviewHandler = () => {
-    dispatch({ type: "delete-review", review: review });
-    navigate(`/album/${aid}`);
+    deleteReview(dispatch, reviewId, albumId);
+    navigate(`/album/${albumId}`);
   };
 
   const WriteCommentButton = () => {
     return (
       <button
         className="btn btn-block btn-info"
-        onClick={() => showModal()}
+        onClick={() => {
+          loggedIn ? showModal() : showLoginModal();
+        }}
         data-bs-toggle="modal"
         data-bs-target="#create-comment-modal"
       >
@@ -62,11 +82,19 @@ const ReviewPage = () => {
     <div>
       <CreateCommentModal show={modalShow} onHide={() => hideModal()} />
       <CreateReportModal show={reportShow} onHide={() => hideReport()} />
+      <LoginModal
+        show={showLogin}
+        onHide={() => hideLoginModal()}
+        purpose={"Write a Comment"}
+      />
       <li className="list-group-item">
         <div className="row">
           <div className="col-3 col-md-2 col-xl-1 d-flex justify-content-center align-items-center">
             <img
-              src={review && review.profile_pic}
+              src={
+                authorInfo &&
+                `https://avatars.dicebear.com/api/pixel-art/${authorInfo.authorId}.svg`
+              }
               className="rs-img-128 img-fluid rs-profile-pic"
               alt="Profile Picture"
               onClick={() => goToUserProfile()}
@@ -74,9 +102,12 @@ const ReviewPage = () => {
           </div>
           <div className="col-9 col-md-10 col-xl-11">
             <div className="d-flex justify-content-between">
-              <Link className="review-list-item " to={`/user/${author._id}`}>
+              <Link
+                className="review-list-item "
+                to={authorInfo ? `/user/${authorInfo.authorId}` : "/"}
+              >
                 <span className="text-muted me-1">Review by</span>
-                <span>{review && review.username}</span>
+                <span>{authorInfo && authorInfo.authorName}</span>
               </Link>
               <div>
                 <i
@@ -106,9 +137,20 @@ const ReviewPage = () => {
                 ></i>
               </div>
             </div>
-            <RatingBar rating={review.rating} />
-            <div>{review && review.review}</div>
-            <ReviewStats review={review} linkComments={false} />
+            <Link
+              className="review-list-item "
+              to={albumData ? `/album/${albumData.id}` : "/"}
+            >
+              <span className="text-muted me-1">Album: </span>
+              <span>{albumData && albumData.name}</span>
+            </Link>
+            <RatingBar rating={reviewInfo && reviewInfo.rating.rating} />
+            <div>{reviewInfo && reviewInfo.content}</div>
+            <ReviewStats
+              review={reviewInfo && reviewInfo}
+              numComments={numComments}
+              linkComments={false}
+            />
 
             <div className="d-flex justify-content-end">
               {WriteCommentButton()}
@@ -116,8 +158,8 @@ const ReviewPage = () => {
           </div>
         </div>
       </li>
-      <CommentList comments={review.comments} />
-      <Link className="text-center" to={`/album/${aid}`}>
+      <CommentList comments={comments && comments} />
+      <Link className="text-center" to={`/album/${albumId}`}>
         <h2 className="mt-3">Back to Album</h2>
       </Link>
     </div>

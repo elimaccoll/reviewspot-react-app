@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../search/search-bar";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/user-actions";
+import moment from "moment";
+import { login } from "../../actions/user-actions";
 
 const Navbar = () => {
-  // TODO: Replace this with actual loggedIn state and user id
-  const loggedIn = true;
-  const moderator = true;
-  const uid = 0;
+  useEffect(() => {
+    const loggedInUntil = localStorage.getItem("loggedInUntil");
+    const loggedIn = loggedInUntil && moment(loggedInUntil) >= moment();
+    if (loggedIn) {
+      login(dispatch);
+    }
+  }, []);
 
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
+  const moderator = userInfo.role === "moderator";
+  const userId = userInfo._id;
+
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    return;
+    logout(dispatch);
   };
 
   return (
@@ -40,12 +53,16 @@ const Navbar = () => {
         <SearchBar />
         <ul className="navbar-nav d-flex justify-content-center align-items-center">
           <li className={`nav-item ${loggedIn ? "d-block" : "d-none"}`}>
-            <Link className="text-black nav-link" to={`/user/${uid}`}>
+            <Link
+              className="text-black nav-link d-flex align-items-center"
+              to={`/user/${userId}/`}
+            >
               <i className="fa fa-user-circle fa-2x"></i>
+              <span className="ms-1">{userInfo.username}</span>
             </Link>
           </li>
           <li className={`nav-item ${loggedIn ? "d-block" : "d-none"}`}>
-            <button className="btn btn-dark" onClick={() => handleLogout()}>
+            <button className="btn btn-dark" onClick={handleLogout}>
               Logout
             </button>
           </li>

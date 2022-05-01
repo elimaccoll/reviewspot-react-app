@@ -20,8 +20,8 @@ export const findHomeAlbums = async (dispatch) => {
   });
 };
 
-export const findSearchAlbums = async (dispatch) => {
-  const albums = await service.findSearchAlbums();
+export const findSearchAlbums = async (dispatch, searchTerm) => {
+  const albums = await service.findSearchAlbums(searchTerm);
   dispatch({
     type: FIND_SEARCH_ALBUMS,
     albums,

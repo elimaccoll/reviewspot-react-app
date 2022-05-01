@@ -1,49 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { findUserById } from "../../actions/user-actions";
+import { findUserReviews } from "../../actions/reviews-actions";
 import ReviewList from "../reviews/review-list";
 import EditBioModal from "./edit-bio-modal";
+import moment from "moment";
 
 const ProfilePage = () => {
-  // Modal
+  const { userId } = useParams();
+
   const [showBio, setShowBio] = useState(false);
   const hideBioModal = () => setShowBio(false);
   const showBioModal = () => setShowBio(true);
 
-  // TODO: Get this info from state/backend
-  const loggedIn = true;
-  const moderator = true;
-  const owner = true;
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
+  const moderator = userInfo.role === "moderator";
+  const owner = userInfo._id === userId;
+
+  const dispatch = useDispatch();
+  // console.log(userId);
+  useEffect(() => findUserById(dispatch, userId), [userId]);
+  const userProfile = useSelector((state) => state.profile);
+  // console.log(userProfile);
+
+  useEffect(() => findUserReviews(dispatch, userId), [userId]);
+  const reviewState = useSelector((state) => state.reviews);
+  const userReviews = reviewState.reviews ? reviewState.reviews : [];
 
   const handleBanUser = () => {
     return;
   };
 
-  const handleDeleteAccount = () => {
-    return;
-  };
-
-  const { uid } = useParams();
   return (
     <div className="bg-dark p-2">
       <div className="row">
         <EditBioModal show={showBio} onHide={() => hideBioModal()} />
         <div className="col-3 d-flex justify-content-center align-items-center">
           <img
-            src={"https://picsum.photos/200/300?random=1"}
+            src={`https://avatars.dicebear.com/api/pixel-art/${userId}.svg`}
             alt="Profile Pic"
             className="img-fluid rounded"
           />
         </div>
         <div className="col-9">
-          <h1>Username for User #{uid}</h1>
-          <div className="text-muted">Joined: Date of account creation</div>
-          <div>Number of Reviews: XX</div>
+          <h1>{userProfile.userInfo && userProfile.userInfo.username}</h1>
+          <div className="text-muted">
+            Joined:{" "}
+            {userProfile.userInfo &&
+              moment(userProfile.userInfo.joinedOn).format("MMMM Do, YYYY")}
+          </div>
+          <div>Reviews: {userProfile && userProfile.numReviews}</div>
+          <div>Comments: {userProfile && userProfile.numComments}</div>
           <hr />
           <p id="user-bio">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-            accusantium dolores, cupiditate dolor nulla minima illum ea ut,
-            commodi reprehenderit eius, enim ipsam? Facilis quam repellendus
-            inventore numquam, deleniti minima.
+            {userProfile.userInfo && userProfile.userInfo.bio}
           </p>
         </div>
       </div>
@@ -64,14 +76,6 @@ const ProfilePage = () => {
         >
           Edit Bio
         </button>
-        {/* <button
-          className={`btn btn-block btn-danger ms-2 ${
-            loggedIn && owner ? "d-block" : "d-none"
-          }`}
-          onClick={() => handleDeleteAccount()}
-        >
-          Delete Account
-        </button> */}
         <button
           className={`btn btn-block btn-danger ms-2 ${
             loggedIn && moderator && !owner ? "d-block" : "d-none"
@@ -81,7 +85,7 @@ const ProfilePage = () => {
           Ban User
         </button>
       </div>
-      <ReviewList />
+      <ReviewList reviews={userReviews} />
     </div>
   );
 };

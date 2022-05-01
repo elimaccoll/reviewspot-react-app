@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { createCommentOnReview } from "../../actions/reviews-actions";
 
 const CreateCommentModal = (props) => {
   const [comment, setComment] = useState("");
-  const { rid } = useParams();
+  const { albumId, reviewId } = useParams();
 
   const dispatch = useDispatch();
   const createCommentHandler = () => {
-    dispatch({ type: "comment-on-review", reviewId: rid, comment: comment });
+    createCommentOnReview(dispatch, reviewId, albumId, comment);
     setComment("");
     props.onHide();
   };

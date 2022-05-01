@@ -1,54 +1,63 @@
 import * as service from "../services/reviews-services";
 
 export const CREATE_REVIEW = "CREATE_REVIEW";
-export const LIKE_REVIEW = "LIKE_REVIEW";
+export const LIKE_REVIEW_FROM_ALBUM = "LIKE_REVIEW_FROM_ALBUM";
 export const DELETE_REVIEW = "DELETE_REVIEW";
-export const FIND_HOME_REVIEWS = "FIND_HOME_REVIEW";
+export const FIND_POPULAR_REVIEWS = "FIND_HOME_REVIEW";
 export const FIND_ALBUM_REVIEWS = "FIND_ALBUM_REVIEWS";
 export const FIND_USER_REVIEWS = "FIND_USER_REVIEWS";
 export const CREATE_COMMENT = "CREATE_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const FIND_REVIEW = "FIND_REVIEW";
+export const FIND_REVIEW_COMMENTS = "FIND_REVIEW_COMMENTS";
 
-export const createReview = async (dispatch, review) => {
-  // TODO: Fill in with all default values
-  review = {
-    likes: 0,
-    comments: [],
-    ...review,
-  };
-  const newReview = await service.createReview(review);
+export const createReview = async (dispatch, review, rating, albumId) => {
+  const newReview = await service.createReview(review, rating, albumId);
   dispatch({
     type: CREATE_REVIEW,
     newReview,
   });
 };
 
-export const likeReview = async (dispatch, review) => {
-  const like_inc = 1;
-  // Move this to backend?
-  if (review.liked) like_inc = -1;
-  review = { ...review, liked: !review.liked, likes: review.likes + like_inc };
-  const status = await service.likeReview(review);
-  // TODO: Check status
+export const findReviewComments = async (dispatch, reviewId, albumID) => {
+  const comments = await service.findReviewComments(reviewId, albumID);
   dispatch({
-    type: LIKE_REVIEW,
+    type: FIND_REVIEW_COMMENTS,
+    comments,
+  });
+};
+
+export const findReviewById = async (dispatch, reviewId, albumID) => {
+  const review = await service.findReviewById(reviewId, albumID);
+  dispatch({
+    type: FIND_REVIEW,
     review,
   });
 };
 
-export const deleteReview = async (dispatch, review) => {
-  const status = await service.deleteReview(review);
+export const likeReview = async (dispatch, reviewId, albumId, userId) => {
+  const review = await service.likeReview(reviewId, albumId);
+  // TODO: Check status
+  dispatch({
+    type: LIKE_REVIEW_FROM_ALBUM,
+    review,
+    userId,
+  });
+};
+
+export const deleteReview = async (dispatch, reviewId, albumId) => {
+  const status = await service.deleteReview(reviewId, albumId);
   // TODO: check status
   dispatch({
     type: DELETE_REVIEW,
-    review,
+    reviewId,
   });
 };
 
-export const findHomeReviews = async (dispatch) => {
-  const reviews = await service.findHomeReviews();
+export const findPopularReviews = async (dispatch) => {
+  const reviews = await service.findPopularReviews();
   dispatch({
-    type: FIND_HOME_REVIEWS,
+    type: FIND_POPULAR_REVIEWS,
     reviews,
   });
 };
@@ -61,8 +70,8 @@ export const findAlbumReviews = async (dispatch, albumId) => {
   });
 };
 
-export const findUserReviews = async (dispatch) => {
-  const reviews = await service.findUserReviews();
+export const findUserReviews = async (dispatch, userId) => {
+  const reviews = await service.findUserReviews(userId);
   dispatch({
     type: FIND_USER_REVIEWS,
     reviews,
@@ -70,25 +79,37 @@ export const findUserReviews = async (dispatch) => {
 };
 
 // TODO: Not sure about comment operations
-export const createCommentOnReview = async (dispatch, review, comment) => {
-  // TODO: Fill in with all default values
-  comment = {
-    ...comment,
-  };
-  const newComment = await service.createCommentOnReview(review, comment);
+export const createCommentOnReview = async (
+  dispatch,
+  reviewId,
+  albumdId,
+  comment
+) => {
+  const newComment = await service.createCommentOnReview(
+    reviewId,
+    albumdId,
+    comment
+  );
   dispatch({
     type: CREATE_COMMENT,
-    review,
     newComment,
   });
 };
 
-export const deleteCommentOnReview = async (dispatch, review, comment) => {
-  const status = await service.deleteCommentOnReview(review, comment);
+export const deleteCommentOnReview = async (
+  dispatch,
+  reviewId,
+  albumId,
+  commentId
+) => {
+  const status = await service.deleteCommentOnReview(
+    reviewId,
+    albumId,
+    commentId
+  );
   // TODO: check status
   dispatch({
     type: DELETE_COMMENT,
-    review,
-    comment,
+    commentId,
   });
 };
