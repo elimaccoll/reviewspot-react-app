@@ -28,6 +28,7 @@ const ProfilePage = () => {
   useEffect(() => findUserReviews(dispatch, userId), [userId]);
   const reviewState = useSelector((state) => state.reviews);
   const userReviews = reviewState.reviews ? reviewState.reviews : [];
+  // console.log(userReviews);
 
   const handleBanUser = () => {
     return;

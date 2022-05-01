@@ -16,6 +16,8 @@ const ReviewListItem = ({ review }) => {
   const onAlbumPage = url.match(find);
   const numComments = review && review.numComments;
 
+  console.log(review);
+
   const goToUserProfile = () => {
     navigate(`/user/${authorInfo.authorId}`);
   };

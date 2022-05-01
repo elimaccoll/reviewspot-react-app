@@ -2,6 +2,12 @@
 
 Actually Do:
 
+[x] REDO REVIEW REDUCER
+[x] FIX LIKES
+[] Rendering Hottest Takes on home page
+[] - Add visual indicator if liked or not
+[] Album name disappearing from userProfile reviewlistitem when liked
+[] - Need to send back albumName with liked review or store it some other way
 [] Check general responsiveness of everything
 [] Add time created/updated to reviews
 [] - Add time updated to comments

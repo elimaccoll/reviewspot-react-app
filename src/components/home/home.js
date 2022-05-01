@@ -20,17 +20,18 @@ const Home = () => {
   const albums = useSelector((state) => state.albums);
 
   const reviewState = useSelector((state) => state.reviews);
-
-  const userReviews =
-    loggedIn && reviewState.reviews ? reviewState.reviews : [];
-  const popularReviews = reviewState.popularReviews
-    ? { reviews: reviewState.popularReviews }
-    : { reviews: [] };
-
   useEffect(() => {
     if (loggedIn) findUserReviews(dispatch, userInfo._id);
   }, [loggedIn]);
+
+  const userReviews =
+    loggedIn && reviewState.reviews ? reviewState.reviews : [];
+
   useEffect(() => findPopularReviews(dispatch), []);
+  const popularReviews = reviewState.reviews;
+
+  // console.log(userReviews);
+  // console.log(popularReviews);
 
   return (
     <div className="mt-2">
@@ -40,7 +41,7 @@ const Home = () => {
         </div>
         <div className="col-lg-4 mt-lg-0 mt-3">
           <h3 className="text-center">Hottest Takes</h3>
-          <ReviewList reviews={popularReviews} />
+          {/* <ReviewList reviews={popularReviews} /> */}
           <div className={`${loggedIn ? "d-block" : "d-none"} mb-5`}>
             <hr />
             <h3 className="text-center">Your Recent Reviews</h3>

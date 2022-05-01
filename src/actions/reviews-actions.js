@@ -10,6 +10,7 @@ export const CREATE_COMMENT = "CREATE_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const FIND_REVIEW = "FIND_REVIEW";
 export const FIND_REVIEW_COMMENTS = "FIND_REVIEW_COMMENTS";
+export const LIKE_REVIEW = "LIKE_REVIEW";
 
 export const createReview = async (dispatch, review, rating, albumId) => {
   const newReview = await service.createReview(review, rating, albumId);
@@ -39,7 +40,7 @@ export const likeReview = async (dispatch, reviewId, albumId, userId) => {
   const review = await service.likeReview(reviewId, albumId);
   // TODO: Check status
   dispatch({
-    type: LIKE_REVIEW_FROM_ALBUM,
+    type: LIKE_REVIEW,
     review,
     userId,
   });

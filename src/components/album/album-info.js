@@ -36,8 +36,6 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
     );
   };
 
-  console.log(numReviews);
-
   return (
     <div className="bg-dark p-2">
       <CreateReviewModal show={showReview} onHide={() => hideReviewModal()} />

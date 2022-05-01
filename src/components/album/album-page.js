@@ -15,15 +15,12 @@ const AlbumPage = () => {
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
 
-  // TODO: Check if album is in state (use id) before refetching
   useEffect(() => findAlbum(dispatch, albumId), [albumId]);
   useEffect(() => findAlbumReviews(dispatch, albumId), [albumId]);
   const album = useSelector((state) => state.albums);
   const reviewState = useSelector((state) => state.reviews);
   const reviews = reviewState.reviews ? reviewState.reviews : null;
   const numReviews = reviews && reviews.total;
-  console.log(numReviews);
-  console.log(reviews);
 
   const alreadyReviewed =
     reviews && reviews.reviews && loggedIn

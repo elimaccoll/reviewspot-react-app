@@ -37,9 +37,9 @@ const ReviewPage = () => {
 
   const reviewState = useSelector((state) => state.reviews);
   useEffect(() => findReviewById(dispatch, reviewId, albumId), []);
-  const review = reviewState.length !== 0 ? reviewState : null;
+  const review = reviewState.length !== 0 ? reviewState.reviews : null;
   const albumData = review && review.albumData;
-  const reviewInfo = review && review.review;
+  const reviewInfo = review && review.reviews[0];
   const authorInfo = reviewInfo && reviewInfo.authorInfo;
   const userIsAuthor = authorInfo && authorInfo.authorId === userInfo._id;
 
@@ -47,7 +47,6 @@ const ReviewPage = () => {
   useEffect(() => findReviewComments(dispatch, reviewId, albumId), []);
   const comments = commentsInfo && commentsInfo.comments;
   const numComments = comments && comments.length;
-  console.log(review);
 
   // TODO: Pull pagination info for comments
   // console.log(review);
@@ -144,7 +143,11 @@ const ReviewPage = () => {
               <span className="text-muted me-1">Album: </span>
               <span>{albumData && albumData.name}</span>
             </Link>
-            <RatingBar rating={reviewInfo && reviewInfo.rating.rating} />
+            <RatingBar
+              rating={
+                reviewInfo && reviewInfo.rating && reviewInfo.rating.rating
+              }
+            />
             <div>{reviewInfo && reviewInfo.content}</div>
             <ReviewStats
               review={reviewInfo && reviewInfo}
