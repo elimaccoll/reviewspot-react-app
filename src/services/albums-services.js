@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:4000/api/v1/"; // TODO: Replace with actuat api paths
+const API_BASE = "http://localhost:4000/api/v1/";
 
 export const findAlbum = async (albumId) => {
   const response = await axios.get(`${API_BASE}album/${albumId}`);

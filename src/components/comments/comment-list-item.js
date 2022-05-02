@@ -3,11 +3,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { deleteCommentOnReview } from "../../actions/reviews-actions";
+import CreateReportModal from "../report/create-report-modal";
 
 const CommentListItem = ({ comment }) => {
   const { reviewId, albumId } = useParams();
   const navigate = useNavigate();
-  // console.log(comment);
+
+  const [reportShow, setReportShow] = useState(false);
+  const hideReport = () => setReportShow(false);
+  const showReport = () => setReportShow(true);
 
   const commentId = comment && comment._id;
   const authorInfo = comment && comment.authorInfo;
@@ -26,8 +30,17 @@ const CommentListItem = ({ comment }) => {
     deleteCommentOnReview(dispatch, reviewId, albumId, commentId);
   };
 
+  console.log(commentId);
+
   return (
     <li className="list-group-item">
+      <CreateReportModal
+        show={reportShow}
+        onHide={() => hideReport()}
+        comment
+        commentId={commentId}
+      />
+
       <div className="row">
         <div className="col-3 col-md-2 col-xl-1 d-flex justify-content-center align-items-center">
           <img
@@ -49,15 +62,23 @@ const CommentListItem = ({ comment }) => {
               <span className="text-muted me-1">Comment by</span>
               <span>{comment && authorInfo.authorName}</span>
             </Link>
-            <div
-              className={`${loggedIn && userIsAuthor ? "d-inline" : "d-none"}`}
-            >
+            <div className={`${loggedIn ? "d-inline" : "d-none"}`}>
               {/* <i
                 className="clickable fa-solid fa-edit me-3"
                 onClick={() => console.log("Edit comment")}
               /> */}
               <i
-                className="clickable fa-solid fa-close"
+                className={`clickable fa-solid fa-flag me-3 ${
+                  loggedIn /* && !userIsAuthor */ ? "d-inline" : "d-none"
+                }`}
+                data-bs-toggle="modal"
+                data-bs-target="#create-report-modal"
+                onClick={() => showReport()}
+              ></i>
+              <i
+                className={`clickable fa-solid fa-close me-3 ${
+                  loggedIn && userIsAuthor ? "d-inline" : "d-none"
+                }`}
                 onClick={() => deleteCommentHandler()}
               />
             </div>

@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { reportComment, reportReview } from "../../actions/reports-actions";
 
 const CreateReportModal = (props) => {
   const [reason, setReason] = useState("");
-  const { rid } = useParams();
+  const { albumId, reviewId } = useParams();
 
+  console.log(props);
   const dispatch = useDispatch();
   const createReportHandler = () => {
-    // dispatch({ type: "report-content", reviewId: rid, reason: reason });
-    // TODO: Dispatch that indicates comment or review?
+    if (props.review) reportReview(dispatch, reason, reviewId, albumId);
+    else if (props.comment) {
+      reportComment(dispatch, reason, reviewId, albumId, props.commentId);
+      console.log(props.commentId);
+    }
     setReason("");
     props.onHide();
   };

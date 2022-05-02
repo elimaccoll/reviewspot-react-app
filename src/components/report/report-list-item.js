@@ -1,21 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import { dismissReport, getCommentByURI } from "../../actions/reports-actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const ReportListItem = ({ report }) => {
+  const dispatch = useDispatch();
   const handleBan = () => {
     return;
   };
   const handleDismiss = () => {
-    return;
+    dismissReport(dispatch, report._id);
   };
+
+  const contentType = report && report.contentType;
 
   return (
     <li className="list-group-item">
-      <div className="row">
-        <div className="col-6">{report.username}</div>
-        <div className="col-6">Link: {report.review}</div>
+      <div>Reporter ID: {report && report.submittedBy} </div>
+      <div>Reason: {report && report.reason}</div>
+      <div
+        className={`${
+          contentType && contentType === "review" ? "d-block" : "d-none"
+        }`}
+      >
+        <Link to={`${report && report.uri ? report.uri : "/"}`}>
+          View Reported Content
+        </Link>
       </div>
-      <div className="row">
-        <div className="col-12">Reason: {report.reason}</div>
+      <div
+        className={`${
+          contentType && contentType === "comment" ? "d-block" : "d-none"
+        }`}
+      >
+        comment content
+      </div>
+      <div>
+        <span className="me-1">Submitted: </span>
+        {report && moment(report.createdAt).format("MMMM Do, YYYY HH:mm:ss")}
       </div>
       <div className="row">
         <div className="d-flex justify-content-end">

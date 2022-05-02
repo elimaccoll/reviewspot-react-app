@@ -22,8 +22,8 @@ const CreateReviewModal = (props) => {
   const dispatch = useDispatch();
   const createReviewHandler = () => {
     if (props.edit) {
-      editReview(dispatch, review, rating, reviewId, albumId);
-      document.getElementById("review-content").textContent = review;
+      if (reviewId) editReview(dispatch, review, rating, reviewId, albumId);
+      else editReview(dispatch, review, rating, props.reviewId, albumId);
     } else {
       createReview(dispatch, review, rating, albumId);
     }
@@ -41,7 +41,7 @@ const CreateReviewModal = (props) => {
   return (
     <Modal {...props} backdrop="static" keyboard={false} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Write a Review</Modal.Title>
+        <Modal.Title>{props.edit ? "Edit Review" : "Write Review"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <textarea

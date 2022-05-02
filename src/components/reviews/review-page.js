@@ -45,7 +45,7 @@ const ReviewPage = () => {
   const review = reviewState.length !== 0 ? reviewState.reviews : null;
   const albumData = review && review.albumData;
   const reviewInfo = review && review.reviews[0];
-  const authorInfo = reviewInfo && reviewInfo.authorInfo;
+  const authorInfo = review && reviewInfo && reviewInfo.authorInfo;
   const userIsAuthor = authorInfo && authorInfo.authorId === userInfo._id;
 
   const commentsInfo = useSelector((state) => state.comments);
@@ -92,7 +92,7 @@ const ReviewPage = () => {
         rating={reviewInfo && reviewInfo.rating.rating}
         review={reviewInfo && reviewInfo.content}
       />
-      <CreateReportModal show={reportShow} onHide={() => hideReport()} />
+      <CreateReportModal show={reportShow} onHide={() => hideReport()} review />
       <LoginModal
         show={showLogin}
         onHide={() => hideLoginModal()}
@@ -119,7 +119,9 @@ const ReviewPage = () => {
               >
                 <span className="text-muted me-1">Review by</span>
                 <span>{authorInfo && authorInfo.authorName}</span>
-                {authorInfo.authorRole === "moderator" && <span className="badge bg-primary me-1 ms-1">Moderator</span> }
+                {authorInfo && authorInfo.authorRole === "moderator" && (
+                  <span className="badge bg-primary me-1 ms-1">Moderator</span>
+                )}
               </Link>
               <div>
                 <i
@@ -128,6 +130,14 @@ const ReviewPage = () => {
                   }`}
                   onClick={() => showEditModal()}
                 />
+                <i
+                  className={`clickable fa-solid fa-flag me-3 ${
+                    loggedIn && !userIsAuthor ? "d-inline" : "d-none"
+                  }`}
+                  data-bs-toggle="modal"
+                  data-bs-target="#create-report-modal"
+                  onClick={() => showReport()}
+                ></i>
                 <i
                   className={`clickable fa-solid fa-close me-3 ${
                     loggedIn && (userIsAuthor || moderator)
@@ -139,14 +149,6 @@ const ReviewPage = () => {
                       deleteReviewHandler();
                   }}
                 />
-                <i
-                  className={`clickable fa-solid fa-flag me-3 ${
-                    loggedIn ? "d-inline" : "d-none"
-                  }`}
-                  data-bs-toggle="modal"
-                  data-bs-target="#create-report-modal"
-                  onClick={() => showReport()}
-                ></i>
               </div>
             </div>
             <Link

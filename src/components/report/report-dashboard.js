@@ -1,31 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getReports } from "../../actions/reports-actions";
 import ReportList from "./report-list";
 
 const ReportDashboard = () => {
-  // TODO: get reports from backend
-  const reports = [
-    {
-      username: "reporter username",
-      review: "review that was reported",
-      reason:
-        "reason why review was reported reason why review was reported reason why review was reported reason why review was reported",
-    },
-    {
-      username: "reporter username",
-      review: "review that was reported",
-      reason:
-        "reason why review was reported reason why review was reported reason why review was reported reason why review was reported",
-    },
-    {
-      username: "reporter username",
-      review: "review that was reported",
-      reason:
-        "reason why review was reported reason why review was reported reason why review was reported reason why review was reported",
-    },
-  ];
+  const dispatch = useDispatch();
+  useEffect(() => getReports(dispatch), [dispatch]);
+  const reports = useSelector((state) => state.reports);
   return (
     <div>
-      <ReportList reports={reports} />
+      <ReportList reports={reports && reports} />
     </div>
   );
 };

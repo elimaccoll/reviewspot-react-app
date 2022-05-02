@@ -38,7 +38,14 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
 
   return (
     <div className="bg-dark p-2">
-      <CreateReviewModal show={showReview} onHide={() => hideReviewModal()} />
+      <CreateReviewModal
+        show={showReview}
+        onHide={() => hideReviewModal()}
+        edit={alreadyReviewed !== false}
+        rating={alreadyReviewed && alreadyReviewed.rating.rating}
+        review={alreadyReviewed && alreadyReviewed.content}
+        reviewId={alreadyReviewed && alreadyReviewed._id}
+      />
       <LoginModal
         show={showLogin}
         onHide={() => hideLoginModal()}
