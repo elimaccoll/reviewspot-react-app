@@ -23,6 +23,7 @@ const CreateReviewModal = (props) => {
   const createReviewHandler = () => {
     if (props.edit) {
       editReview(dispatch, review, rating, reviewId, albumId);
+      document.getElementById("review-content").textContent = review;
     } else {
       createReview(dispatch, review, rating, albumId);
     }

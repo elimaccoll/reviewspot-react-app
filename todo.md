@@ -15,7 +15,7 @@ Actually Do:
 [x] Liking reviews
 [x] - Fix link area on reviewListItem to be able to like a post without going to its page
 [x] - Have to be logged in to like
-[] - Clean up user reducer for LIKE_REVIEW
+[x] - Clean up user reducer for LIKE_REVIEW
 [x] User profile page doesn't update when clicking profile on navbar
 [] Login stuff
 [x] Change profile links to use id instead of username
@@ -55,7 +55,3 @@ Actually Do:
 [] Clean up styling for AlbumListItem -- album title, artist, and responsiveness of image
 [] Navbar responsiveness is a little weird
 [] The back button doesn't rerender the page
-
-BACKEND
-
-- Missed import for User model in general-resources
