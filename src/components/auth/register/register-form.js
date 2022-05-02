@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { register } from "../../../actions/user-actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [credentials, setCredentials] = useState({
@@ -12,11 +15,30 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleRegister = () => {
+    const toastOptions = {
+      position: toast.POSITION.TOP_CENTER,
+      pauseOnHover: false,
+      theme: "dark"
+    };
     if (credentials.password !== credentials.verify_password) {
+      toast("Passwords do not match. Please ensure they are the same.", toastOptions);
       return;
     }
-    register(dispatch, credentials.username, credentials.password);
+    register(dispatch, credentials.username, credentials.password)
+    .catch((error) => {
+      if (error.response.status < 500) {
+        toast("This username is either invalid or has already been taken. Please try again.", toastOptions);
+      } else {
+        toast("An internal server error has occurred. Please try again or contact a site contributor.", toastOptions);
+      }
+    });
   };
+
+  const userInfo = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userInfo.loggedIn) navigate("/");
+  });
 
   return (
     <div className="d-flex flex-column align-items-center">
@@ -77,6 +99,7 @@ const RegisterForm = () => {
       <button className="btn btn-success w-25" onClick={() => handleRegister()}>
         Register
       </button>
+      <ToastContainer />
     </div>
   );
 };

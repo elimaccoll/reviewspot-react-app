@@ -48,6 +48,8 @@ const CommentListItem = ({ comment }) => {
             >
               <span className="text-muted me-1">Comment by</span>
               <span>{comment && authorInfo.authorName}</span>
+              {authorInfo && authorInfo.authorRole === "moderator" &&
+              <span className="badge bg-primary me-1 ms-1">Moderator</span> }
             </Link>
             <div
               className={`${loggedIn && userIsAuthor ? "d-inline" : "d-none"}`}

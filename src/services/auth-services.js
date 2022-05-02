@@ -1,14 +1,13 @@
 import axios from "axios";
-
-const API_BASE = "http://localhost:4000/api/v1/auth/";
+import { API_BASE } from "./constants";
 
 export const isLoggedIn = async () => {
-  const response = await axios.get(`${API_BASE}isLoggedIn`);
+  const response = await axios.get(`${API_BASE}/auth/isLoggedIn`);
   return response.data;
 };
 
 export const login = async (username, password) => {
-  const response = await axios.post(`${API_BASE}login`, {
+  const response = await axios.post(`${API_BASE}/auth/login`, {
     username: username,
     password: password,
   });
@@ -16,7 +15,7 @@ export const login = async (username, password) => {
 };
 
 export const register = async (username, password) => {
-  const response = await axios.post(`${API_BASE}signUp`, {
+  const response = await axios.post(`${API_BASE}/auth/signUp`, {
     username: username,
     password: password,
   });
@@ -25,7 +24,7 @@ export const register = async (username, password) => {
 
 export const logout = async () => {
   // TODO: Using a post for now? like appending to a ban list
-  const response = await axios.post(`${API_BASE}logout`, {
+  const response = await axios.post(`${API_BASE}/auth/logout`, {
     withCredentials: true,
   });
   return response.data;

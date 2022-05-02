@@ -58,7 +58,11 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
             {albumInfo && createArtistsString(albumInfo.artists)}
           </div>
           <AlbumStats album={albumInfo} numReviews={numReviews} />
-          <RatingBar rating={albumInfo && albumInfo.popularity} />
+          {
+            albumInfo && albumInfo.avgRating ?
+            <RatingBar rating={albumInfo && albumInfo.avgRating} /> :
+            <span className="text-muted">No ratings available.</span> 
+          }
           <div className={"d-md-none d-flex justify-content-end"}>
             {WriteReviewButton()}
           </div>

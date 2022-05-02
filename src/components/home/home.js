@@ -20,8 +20,8 @@ const Home = () => {
   const albums = useSelector((state) => state.albums);
 
   const reviewState = useSelector((state) => state.reviews);
+  const popularReviews = reviewState.reviews && reviewState.reviews.reviews;
   useEffect(() => findPopularReviews(dispatch), []);
-  const popularReviews = reviewState.reviews;
 
   return (
     <div className="mt-2">
@@ -30,8 +30,12 @@ const Home = () => {
           <AlbumList albums={albums} />
         </div>
         <div className="col-lg-4 mt-lg-0 mt-3">
-          <h3 className="text-center">Hottest Takes</h3>
-          <ReviewList reviews={popularReviews} />
+          <h3 className="text-center">&#128293; Hottest Takes &#128293;</h3>
+          {
+            popularReviews && popularReviews.length > 0 ? 
+              <ReviewList reviews={popularReviews} /> :
+              <h4 className="text-center text-muted">No reviews to show.</h4>
+          }
         </div>
       </div>
     </div>
