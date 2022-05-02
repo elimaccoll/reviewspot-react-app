@@ -18,7 +18,7 @@ const RatingBar = ({ rating }) => {
         </div>
       </div>
       <div className={`${rating ? "d-block" : "d-none"}`}>
-        {rating / 10} / 10
+        {rating.toFixed(0) / 10} / 10
       </div>
     </div>
   );
