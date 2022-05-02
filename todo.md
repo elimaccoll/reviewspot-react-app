@@ -1,12 +1,12 @@
 CLEAR DATABASE
 
 [] Reviews don't disappear on delete
-[] album title disappears on review edit
-[] moderator badge doesn't always render
+[x] album title disappears on review edit
+[x] moderator badge doesn't always render
 [x] bug in album-info that stopped comments from being written
 [x] editing review on album page makes number of reviews go away
-[] avgRating always comes back null
-[] updating ratings is one step behind
+[x] avgRating always comes back null
+[x] updating ratings is one step behind
 
 Actually Do:
 

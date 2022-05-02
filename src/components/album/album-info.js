@@ -36,6 +36,8 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
     );
   };
 
+  console.log(albumInfo && albumInfo.avgRating);
+
   return (
     <div className="bg-dark p-2">
       <CreateReviewModal
@@ -65,8 +67,8 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
             {albumInfo && createArtistsString(albumInfo.artists)}
           </div>
           <AlbumStats album={albumInfo} numReviews={numReviews} />
-          {albumInfo && albumInfo.avgRating >= 0 ? (
-            <RatingBar rating={albumInfo && albumInfo.avgRating} />
+          {albumInfo && albumInfo.avgRating && albumInfo.avgRating >= 0 ? (
+            <RatingBar rating={albumInfo.avgRating} />
           ) : (
             <span className="text-muted">No ratings available.</span>
           )}
