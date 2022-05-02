@@ -7,9 +7,15 @@ const ReportDashboard = () => {
   const dispatch = useDispatch();
   useEffect(() => getReports(dispatch), [dispatch]);
   const reports = useSelector((state) => state.reports);
+  const noReports = !reports || (reports && reports.total === 0);
   return (
     <div>
-      <ReportList reports={reports && reports} />
+      <div className={`${noReports ? "d-none" : "d-block"}`}>
+        <ReportList reports={reports && reports} />
+      </div>
+      <div className={`${noReports ? "d-block" : "d-none"} text-center mt-5`}>
+        <h2>No Active Reports</h2>
+      </div>
     </div>
   );
 };

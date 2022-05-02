@@ -18,7 +18,6 @@ const Navbar = () => {
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
   const moderator = userInfo.role === "moderator";
-  console.log(userInfo);
   const userId = userInfo._id;
 
   const dispatch = useDispatch();

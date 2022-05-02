@@ -23,6 +23,7 @@ const reportReducer = (state = [], action) => {
       );
       state = {
         ...state,
+        total: state.total - 1,
         reports: reportsWithoutDismissed,
       };
       return state;

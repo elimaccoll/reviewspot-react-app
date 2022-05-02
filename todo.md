@@ -18,7 +18,7 @@ Actually Do:
 [x] Album name disappearing from userProfile reviewlistitem when liked
 [x] - Need to send back albumName with liked review or store it some other way
 [] Check general responsiveness of everything
-[] Add time created/updated to reviews
+[x] Add time created/updated to reviews
 [] - Add time updated to comments
 [x] Live update number of comments on reviews
 [x] Liking reviews
