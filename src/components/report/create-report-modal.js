@@ -8,7 +8,6 @@ const CreateReportModal = (props) => {
   const [reason, setReason] = useState("");
   const { albumId, reviewId } = useParams();
 
-  console.log(props);
   const dispatch = useDispatch();
   const createReportHandler = () => {
     if (props.review) reportReview(dispatch, reason, reviewId, albumId);

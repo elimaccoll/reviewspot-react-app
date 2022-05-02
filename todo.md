@@ -14,9 +14,9 @@ Actually Do:
 [x] REDO REVIEW REDUCER
 [x] FIX LIKES
 [x] Rendering Hottest Takes on home page
-[] - Add visual indicator if liked or not
-[] Album name disappearing from userProfile reviewlistitem when liked
-[] - Need to send back albumName with liked review or store it some other way
+[x] - Add visual indicator if liked or not
+[x] Album name disappearing from userProfile reviewlistitem when liked
+[x] - Need to send back albumName with liked review or store it some other way
 [] Check general responsiveness of everything
 [] Add time created/updated to reviews
 [] - Add time updated to comments
@@ -26,7 +26,7 @@ Actually Do:
 [x] - Have to be logged in to like
 [x] - Clean up user reducer for LIKE_REVIEW
 [x] User profile page doesn't update when clicking profile on navbar
-[] Login stuff
+[] Login credentials
 [x] Change profile links to use id instead of username
 [x] Search for albums
 [x] Home page
@@ -44,9 +44,9 @@ Actually Do:
 [x] Profile page
 [x] - Get user reviews
 [x] - finish edit bio
-[] Report page (waiting for server routes)
+[x] Report page
 [x] Change some reponses to give certain information
-[] - Total number of comments on a review (saves a get request)
+[x] - Total number of comments on a review (saves a get request)
 [x] - Album name with a review instead of just albumId (saves a get request)
 [] Error handling for all axios requests
 [] - 401 for logout is most important

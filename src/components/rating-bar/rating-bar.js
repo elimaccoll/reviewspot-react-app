@@ -6,7 +6,7 @@ const RatingBar = ({ rating }) => {
   }
   return (
     <div className="d-flex align-items-center">
-      <div className={`${rating ? "d-block" : "d-none"}`}>
+      <div className={`${rating && rating ? "d-block" : "d-none"}`}>
         <div className="rs-rating-bar me-2">
           <div className="progress">
             <div
@@ -21,7 +21,7 @@ const RatingBar = ({ rating }) => {
         </div>
       </div>
       <div className={`${rating && rating >= 0 ? "d-block" : "d-none"}`}>
-        {rating.toFixed(0) / 10} / 10
+        {rating && rating.toFixed(0) / 10} / 10
       </div>
     </div>
   );

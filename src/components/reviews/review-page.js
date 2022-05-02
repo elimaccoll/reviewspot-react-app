@@ -45,6 +45,8 @@ const ReviewPage = () => {
   const review = reviewState.length !== 0 ? reviewState.reviews : null;
   const albumData = review && review.albumData;
   const reviewInfo = review && review.reviews[0];
+  const albumName =
+    review && (albumData ? albumData.name : reviewInfo.albumName);
   const authorInfo = review && reviewInfo && reviewInfo.authorInfo;
   const userIsAuthor = authorInfo && authorInfo.authorId === userInfo._id;
 
@@ -54,8 +56,6 @@ const ReviewPage = () => {
   const numComments = comments && comments.length;
 
   // TODO: Pull pagination info for comments
-  // console.log(review);
-  // console.log(comments);
 
   const navigate = useNavigate();
   const goToUserProfile = () => {
@@ -156,7 +156,7 @@ const ReviewPage = () => {
               to={albumData ? `/album/${albumData.id}` : "/"}
             >
               <span className="text-muted me-1">Album: </span>
-              <span>{albumData && albumData.name}</span>
+              <span>{albumName && albumName}</span>
             </Link>
             <RatingBar
               rating={

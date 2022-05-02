@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { likeReview } from "../../actions/reviews-actions";
 import LoginModal from "../auth/login/login-modal";
+import { alreadyLikedByUser } from "../helpers/reviews";
 
 const ReviewStats = ({ review, numComments, linkComments = true }) => {
   const albumId = review ? review.albumId : null;
@@ -10,10 +11,11 @@ const ReviewStats = ({ review, numComments, linkComments = true }) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.user);
-  // TODO: Have to be logged in to like
   const loggedIn = userInfo.loggedIn;
-
-  // console.log(review);
+  const alreadyLiked =
+    loggedIn && review
+      ? alreadyLikedByUser(review.likedBy, userInfo._id)
+      : false;
 
   const [showLogin, setShowLogin] = useState(false);
   const hideLoginModal = () => setShowLogin(false);
@@ -32,7 +34,9 @@ const ReviewStats = ({ review, numComments, linkComments = true }) => {
       />
       <span className="me-2">
         <i
-          className="text-danger clickable fa-solid fa-heart me-1"
+          className={`text-danger clickable ${
+            alreadyLiked ? "fa-solid" : "fa-regular"
+          } fa-heart me-1`}
           onClick={() => (loggedIn ? likeReviewHandler() : showLoginModal())}
         ></i>
         {review && review.likedBy.length}
