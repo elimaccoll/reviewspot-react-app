@@ -11,7 +11,7 @@ const LoginModal = (props) => {
   return (
     <Modal {...props} backdrop="static" keyboard={false} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Login to Write a Review</Modal.Title>
+        <Modal.Title>Login to {props.purpose}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Link to="/login/">

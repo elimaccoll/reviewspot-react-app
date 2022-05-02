@@ -2,8 +2,9 @@ import React from "react";
 import CommentListItem from "./comment-list-item";
 
 const CommentList = ({ comments }) => {
-  const prev = true; // If previous page
-  const next = true; // If next page
+  const prev = false; // If previous page
+  const next = false; // If next page
+  // console.log(comments);
 
   const loadNext = () => {
     return;
@@ -14,9 +15,10 @@ const CommentList = ({ comments }) => {
 
   return (
     <ul className="list-group mt-2">
-      {comments.map((comment) => {
-        return <CommentListItem comment={comment} />;
-      })}
+      {comments &&
+        comments.map((comment) => {
+          return <CommentListItem comment={comment} />;
+        })}
       <div className="bg-light d-flex justify-content-around">
         <i
           className={`rs-dark clickable fas fa-arrow-left fa-2x ${

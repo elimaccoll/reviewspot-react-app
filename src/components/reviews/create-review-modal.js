@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
+import { createReview, editReview } from "../../actions/reviews-actions";
+import { useParams } from "react-router-dom";
 
 const CreateReviewModal = (props) => {
+  const { albumId, reviewId } = useParams();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const loadRating = props.rating ? props.rating : 0;
+  const loadReview = props.review ? props.review : "";
+  useEffect(() => {
+    setRating(loadRating);
+    setReview(loadReview);
+  }, [loadRating, loadReview]);
+
   const handleRating = (userRating) => {
     setRating(userRating);
   };
   const dispatch = useDispatch();
   const createReviewHandler = () => {
-    dispatch({ type: "create-review", review: review, rating: rating });
+    if (props.edit) {
+      if (reviewId) editReview(dispatch, review, rating, reviewId, albumId);
+      else editReview(dispatch, review, rating, props.reviewId, albumId);
+    } else {
+      createReview(dispatch, review, rating, albumId);
+    }
     setReview("");
+    setRating(0);
     props.onHide();
   };
 
@@ -25,7 +41,7 @@ const CreateReviewModal = (props) => {
   return (
     <Modal {...props} backdrop="static" keyboard={false} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Write a Review</Modal.Title>
+        <Modal.Title>{props.edit ? "Edit Review" : "Write Review"}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <textarea

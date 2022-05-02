@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AlbumInfo from "./album-info";
 import ReviewList from "../reviews/review-list";
 import { useParams } from "react-router-dom";
-import albums from "../data/albums.json";
+import { findAlbumReviews } from "../../actions/reviews-actions";
+import { findAlbum } from "../../actions/albums-actions";
+import { useDispatch, useSelector } from "react-redux";
+import { userAlreadyReviewedAlbum } from "../helpers/album";
 
 const AlbumPage = () => {
-  const { aid } = useParams();
-  // TODO: Replace this with db entry with that id
-  const album = albums[aid];
+  const { albumId } = useParams();
+
+  const dispatch = useDispatch();
+
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
+
+  useEffect(() => findAlbum(dispatch, albumId), [albumId]);
+  useEffect(() => findAlbumReviews(dispatch, albumId), [albumId]);
+  const album = useSelector((state) => state.albums);
+  const reviewState = useSelector((state) => state.reviews);
+  const reviews = reviewState.reviews ? reviewState.reviews : null;
+  const numReviews = reviews && reviews.total;
+
+  const alreadyReviewed =
+    reviews && reviews.reviews && loggedIn
+      ? userAlreadyReviewedAlbum(reviews.reviews, userInfo._id)
+      : false;
+
   return (
     <div>
-      <AlbumInfo album={album} />
-      <ReviewList />
+      <AlbumInfo
+        album={album}
+        numReviews={numReviews}
+        alreadyReviewed={alreadyReviewed}
+      />
+      <ReviewList reviews={reviews} />
     </div>
   );
 };

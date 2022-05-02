@@ -2,54 +2,59 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createCommentOnReview } from "../../actions/reviews-actions";
+import { reportComment, reportReview } from "../../actions/reports-actions";
 
-const CreateCommentModal = (props) => {
-  const [comment, setComment] = useState("");
+const CreateReportModal = (props) => {
+  const [reason, setReason] = useState("");
   const { albumId, reviewId } = useParams();
 
+  console.log(props);
   const dispatch = useDispatch();
-  const createCommentHandler = () => {
-    createCommentOnReview(dispatch, reviewId, albumId, comment);
-    setComment("");
+  const createReportHandler = () => {
+    if (props.review) reportReview(dispatch, reason, reviewId, albumId);
+    else if (props.comment) {
+      reportComment(dispatch, reason, reviewId, albumId, props.commentId);
+      console.log(props.commentId);
+    }
+    setReason("");
     props.onHide();
   };
 
   const handleClose = () => {
-    setComment("");
+    setReason("");
     props.onHide();
   };
 
   return (
     <Modal {...props} backdrop="static" keyboard={false} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Write a Comment</Modal.Title>
+        <Modal.Title>Report Review/Comment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <textarea
           autoFocus
           className="form-control"
-          name="create-comment-text"
-          id="create-comment-text"
+          name="create-report-text"
+          id="create-report-text"
           cols="30"
           rows="3"
-          placeholder="Add a comment..."
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
+          placeholder="Give your reason..."
+          value={reason}
+          onChange={(event) => setReason(event.target.value)}
         ></textarea>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-between">
         <Button className="btn btn-danger" onClick={() => handleClose()}>
-          Close
+          Cancel
         </Button>
         <Button
           className="btn btn-success"
-          onClick={() => createCommentHandler()}
+          onClick={() => createReportHandler()}
         >
-          Create
+          Submit
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
-export default CreateCommentModal;
+export default CreateReportModal;

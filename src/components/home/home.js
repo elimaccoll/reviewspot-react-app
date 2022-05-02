@@ -1,36 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AlbumList from "../album/album-list";
 import ReviewList from "../reviews/review-list";
+import { useDispatch, useSelector } from "react-redux";
+import { findHomeAlbums } from "../../actions/albums-actions";
+import { isLoggedIn } from "../../actions/user-actions";
+import {
+  findPopularReviews,
+  findUserReviews,
+} from "../../actions/reviews-actions";
 
 const Home = () => {
-  // TODO: Conditionally render depending on loggedIn
-  // - LOGGED IN
-  // -- show user's recent reviews
-  // - NOT LOGGED IN
-  // -- show no recent review OR show recent reviews in general/top reviews
-  const loggedIn = true;
+  const dispatch = useDispatch();
 
-  // TODO: Not sure if this is how we would actually do this, but gets the point across
-  const loadUserRecentReviews = () => {
-    return;
-  };
-  const loadGlobalRecentReviews = () => {
-    return;
-  };
+  useEffect(() => isLoggedIn(dispatch), []);
+  const userInfo = useSelector((state) => state.user);
+  const loggedIn = userInfo.loggedIn;
 
-  // TODO: Pass this into ReviewList
-  const reviewsToRender = loggedIn
-    ? loadUserRecentReviews()
-    : loadGlobalRecentReviews();
+  useEffect(() => findHomeAlbums(dispatch), []);
+  const albums = useSelector((state) => state.albums);
+
+  const reviewState = useSelector((state) => state.reviews);
+  const popularReviews = reviewState.reviews && reviewState.reviews.reviews;
+  useEffect(() => findPopularReviews(dispatch), []);
+
+  console.log(popularReviews);
 
   return (
     <div className="mt-2">
       <div className="row">
-        <div className="col-12 col-md-8">
-          <AlbumList />
+        <div className="col-12 col-lg-8">
+          <AlbumList albums={albums} />
         </div>
-        <div className="col-md-4 mt-md-0 mt-3">
-          <ReviewList />
+        <div className="col-lg-4 mt-lg-0 mt-3">
+          <h3 className="text-center">&#128293; Hottest Takes &#128293;</h3>
+          {popularReviews && popularReviews.length > 0 ? (
+            <ReviewList reviews={{ reviews: popularReviews }} />
+          ) : (
+            <h4 className="text-center text-muted">No reviews to show.</h4>
+          )}
         </div>
       </div>
     </div>

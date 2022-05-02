@@ -25,6 +25,9 @@ const SearchBar = () => {
           onChange={(event) => {
             setSearch(event.target.value);
           }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") Search();
+          }}
         />
       </div>
     </div>
