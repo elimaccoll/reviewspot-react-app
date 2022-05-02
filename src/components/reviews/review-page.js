@@ -56,6 +56,7 @@ const ReviewPage = () => {
   const numComments = comments && comments.length;
 
   // TODO: Pull pagination info for comments
+  console.log(reviewInfo);
 
   const navigate = useNavigate();
   const goToUserProfile = () => {
@@ -151,10 +152,7 @@ const ReviewPage = () => {
                 />
               </div>
             </div>
-            <Link
-              className="review-list-item "
-              to={albumData ? `/album/${albumData.id}` : "/"}
-            >
+            <Link className="review-list-item " to={`/album/${albumId}`}>
               <span className="text-muted me-1">Album: </span>
               <span>{albumName && albumName}</span>
             </Link>

@@ -30,8 +30,6 @@ const CommentListItem = ({ comment }) => {
     deleteCommentOnReview(dispatch, reviewId, albumId, commentId);
   };
 
-  console.log(commentId);
-
   return (
     <li className="list-group-item">
       <CreateReportModal
