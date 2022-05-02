@@ -32,24 +32,25 @@ const Navbar = () => {
           ReviewSpot
         </a>
 
-        <div className="collapse navbar-collapse" id="navbarColor01">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <a className="nav-link text-black active" href="/">
-                Home
-              </a>
-            </li>
-            <li
-              className={`nav-item ${
-                loggedIn && moderator ? "d-inline" : "d-none"
-              }`}
+        <ul className="navbar-nav me-auto">
+          <li className="nav-item">
+            <a className="nav-link text-black active text-center" href="/">
+              Home
+            </a>
+          </li>
+          <li
+            className={`nav-item ${
+              loggedIn && moderator ? "d-inline" : "d-none"
+            }`}
+          >
+            <a
+              className="nav-link text-black active text-center"
+              href="/reports/"
             >
-              <a className="nav-link text-black active" href="/reports/">
-                Reports
-              </a>
-            </li>
-          </ul>
-        </div>
+              Reports
+            </a>
+          </li>
+        </ul>
         <SearchBar />
         <ul className="navbar-nav d-flex justify-content-center align-items-center">
           <li className={`nav-item ${loggedIn ? "d-block" : "d-none"}`}>
