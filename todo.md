@@ -50,7 +50,7 @@ Actually Do:
 [] - Logged in users should access login or register page
 [] Add a Review popularity bar (confusing with just the spotify popularity bar)
 [] Pagination
-[] Role badges
+[X] Role badges
 [] Toast messages
 [] Clean up styling for AlbumListItem -- album title, artist, and responsiveness of image
 [] Navbar responsiveness is a little weird

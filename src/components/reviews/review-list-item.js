@@ -47,6 +47,7 @@ const ReviewListItem = ({ review }) => {
             >
               <span className="text-muted me-1">Review by</span>
               <span>{authorInfo.authorName}</span>
+              {(authorInfo.authorRole === "moderator") && <span className="badge bg-primary me-1 ms-1">Moderator</span>}
             </Link>
           </div>
           <Link

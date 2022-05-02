@@ -47,6 +47,10 @@ const ProfilePage = () => {
         </div>
         <div className="col-9">
           <h1>{userProfile.userInfo && userProfile.userInfo.username}</h1>
+          {
+            moderator &&
+            <div className="badge bg-primary">Moderator</div>
+          }
           <div className="text-muted">
             Joined:{" "}
             {userProfile.userInfo &&
