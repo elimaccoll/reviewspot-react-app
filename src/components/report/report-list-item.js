@@ -15,10 +15,18 @@ const ReportListItem = ({ report }) => {
 
   const contentType = report && report.contentType;
 
+  useEffect(() => {
+    if (contentType === "comment") getCommentByURI(dispatch, report.uri);
+  }, []);
+  const reportState = useSelector((state) => state.reports);
+  const commentContent = report.commentContent;
+
   return (
     <li className="list-group-item">
       <div>Reporter ID: {report && report.submittedBy} </div>
-      <div>Reason: {report && report.reason}</div>
+      <div>
+        Reason: <span className="text-muted">{report && report.reason}</span>
+      </div>
       <div
         className={`${
           contentType && contentType === "review" ? "d-block" : "d-none"
@@ -33,7 +41,8 @@ const ReportListItem = ({ report }) => {
           contentType && contentType === "comment" ? "d-block" : "d-none"
         }`}
       >
-        comment content
+        <span className="me-1">Comment Content: </span>
+        <span className="text-muted">{commentContent && commentContent}</span>
       </div>
       <div>
         <span className="me-1">Submitted: </span>

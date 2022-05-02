@@ -9,11 +9,7 @@ import {
 const reportReducer = (state = [], action) => {
   switch (action.type) {
     case GET_REPORTED_COMMENT:
-      state = {
-        ...state,
-        comment: action.comment,
-      };
-      return state;
+      return;
     case REPORT_COMMENT:
       return action.report;
     case REPORT_REVIEW:

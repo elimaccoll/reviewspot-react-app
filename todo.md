@@ -43,15 +43,15 @@ Actually Do:
 [] - 401 for logout is most important
 [] Moderator functionality
 [] - Banning users
-[] - Reports
+[x] - Reports
 [] Checking if user is banned
 [] Redirecting from pages users do not have permission for
 [] - General user cant access reports page
 [] - Logged in users should access login or register page
-[] Add a Review popularity bar (confusing with just the spotify popularity bar)
+[x] Add a Review popularity bar (confusing with just the spotify popularity bar)
 [] Pagination
 [X] Role badges
-[] Toast messages
+[x] Toast messages
 [] Clean up styling for AlbumListItem -- album title, artist, and responsiveness of image
 [] Navbar responsiveness is a little weird
 [] The back button doesn't rerender the page

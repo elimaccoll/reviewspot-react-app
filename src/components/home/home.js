@@ -23,6 +23,8 @@ const Home = () => {
   const popularReviews = reviewState.reviews && reviewState.reviews.reviews;
   useEffect(() => findPopularReviews(dispatch), []);
 
+  console.log(popularReviews);
+
   return (
     <div className="mt-2">
       <div className="row">
@@ -31,11 +33,11 @@ const Home = () => {
         </div>
         <div className="col-lg-4 mt-lg-0 mt-3">
           <h3 className="text-center">&#128293; Hottest Takes &#128293;</h3>
-          {
-            popularReviews && popularReviews.length > 0 ? 
-              <ReviewList reviews={popularReviews} /> :
-              <h4 className="text-center text-muted">No reviews to show.</h4>
-          }
+          {popularReviews && popularReviews.length > 0 ? (
+            <ReviewList reviews={{ reviews: popularReviews }} />
+          ) : (
+            <h4 className="text-center text-muted">No reviews to show.</h4>
+          )}
         </div>
       </div>
     </div>

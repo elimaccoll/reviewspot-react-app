@@ -5,6 +5,7 @@ const ReportList = ({ reports }) => {
   const prev = reports && reports.prev;
   const next = reports && reports.next;
   const total = reports && reports.total;
+
   return (
     <ul className="list-group">
       {reports.reports &&
