@@ -11,6 +11,26 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const FIND_REVIEW = "FIND_REVIEW";
 export const FIND_REVIEW_COMMENTS = "FIND_REVIEW_COMMENTS";
 export const LIKE_REVIEW = "LIKE_REVIEW";
+export const EDIT_REVIEW = "EDIT_REVIEW";
+
+export const editReview = async (
+  dispatch,
+  review,
+  rating,
+  reviewId,
+  albumId
+) => {
+  const updatedReview = await service.editReview(
+    review,
+    rating,
+    reviewId,
+    albumId
+  );
+  dispatch({
+    type: EDIT_REVIEW,
+    updatedReview,
+  });
+};
 
 export const createReview = async (dispatch, review, rating, albumId) => {
   const newReview = await service.createReview(review, rating, albumId);

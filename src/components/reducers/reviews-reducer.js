@@ -1,20 +1,35 @@
 import {
   CREATE_REVIEW,
-  LIKE_REVIEW_FROM_ALBUM,
-  LIKE_USER_REVIEW,
   LIKE_REVIEW,
   DELETE_REVIEW,
   FIND_POPULAR_REVIEWS,
   FIND_ALBUM_REVIEWS,
   FIND_USER_REVIEWS,
-  CREATE_COMMENT,
-  DELETE_COMMENT,
   FIND_REVIEW,
-  FIND_REVIEW_COMMENTS,
+  EDIT_REVIEW,
 } from "../../actions/reviews-actions";
 
 const reviewsReducer = (state = [], action) => {
   switch (action.type) {
+    case EDIT_REVIEW:
+      console.log(state);
+      console.log(action);
+      return;
+    case CREATE_REVIEW:
+      state = {
+        ...state,
+        reviews: { reviews: [action.newReview, ...state.reviews.reviews] },
+      };
+      return state;
+    case DELETE_REVIEW:
+      const remainingReviews = state.reviews.reviews.filter(
+        (review) => review._id !== action.reviewId
+      );
+      state = {
+        ...state,
+        reviews: { reviews: remainingReviews },
+      };
+      return state;
     case LIKE_REVIEW:
       let likedReview = action.review.updatedReview;
       const userId = action.userId;

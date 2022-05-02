@@ -52,10 +52,10 @@ const CommentListItem = ({ comment }) => {
             <div
               className={`${loggedIn && userIsAuthor ? "d-inline" : "d-none"}`}
             >
-              <i
+              {/* <i
                 className="clickable fa-solid fa-edit me-3"
                 onClick={() => console.log("Edit comment")}
-              />
+              /> */}
               <i
                 className="clickable fa-solid fa-close"
                 onClick={() => deleteCommentHandler()}

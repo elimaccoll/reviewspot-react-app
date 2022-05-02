@@ -2,6 +2,17 @@ import axios from "axios";
 
 const API_BASE = "http://localhost:4000/api/v1";
 
+export const editReview = async (review, rating, reviewId, albumId) => {
+  const response = await axios.put(
+    `${API_BASE}/album/${albumId}/review/${reviewId}`,
+    {
+      content: review,
+      rating: rating,
+    }
+  );
+  return response.data;
+};
+
 export const createReview = async (review, rating, albumId) => {
   const response = await axios.post(`${API_BASE}/album/${albumId}/review`, {
     content: review,

@@ -4,14 +4,13 @@ Actually Do:
 
 [x] REDO REVIEW REDUCER
 [x] FIX LIKES
-[] Rendering Hottest Takes on home page
+[x] Rendering Hottest Takes on home page
 [] - Add visual indicator if liked or not
 [] Album name disappearing from userProfile reviewlistitem when liked
 [] - Need to send back albumName with liked review or store it some other way
 [] Check general responsiveness of everything
 [] Add time created/updated to reviews
 [] - Add time updated to comments
-[] Album name goes away when liking a review
 [x] Live update number of comments on reviews
 [x] Liking reviews
 [x] - Fix link area on reviewListItem to be able to like a post without going to its page
@@ -25,12 +24,11 @@ Actually Do:
 [x] - New releases -- albums
 [x] - Conditionally render reviews based on login
 [x] Manage state better -- Refresh page on state change
-[] - merge some reducers if possible
 [x] - Fix comment state
 [x] - Fix review state
 [x] Need to be logged in to comment (reuse same modal to redirect to login)
 [x] Conditionally render the 'Write Review' button if the user has already written a review
-[] - Editing reviews (load user's content)
+[x] - Editing reviews (load user's content)
 [x] Figure out comment logistics
 [x] - Do we want to allow user comments on own post
 [x] - Do we want to allow user multiple comments on a single post

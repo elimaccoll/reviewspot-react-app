@@ -1,22 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
-import { createReview } from "../../actions/reviews-actions";
+import { createReview, editReview } from "../../actions/reviews-actions";
 import { useParams } from "react-router-dom";
 
 const CreateReviewModal = (props) => {
-  const { albumId } = useParams();
+  const { albumId, reviewId } = useParams();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const loadRating = props.rating ? props.rating : 0;
+  const loadReview = props.review ? props.review : "";
+  useEffect(() => {
+    setRating(loadRating);
+    setReview(loadReview);
+  }, [loadRating, loadReview]);
+
   const handleRating = (userRating) => {
     setRating(userRating);
   };
   const dispatch = useDispatch();
   const createReviewHandler = () => {
-    // dispatch({ type: "create-review", review: review, rating: rating });
-    createReview(dispatch, review, rating, albumId);
+    if (props.edit) {
+      editReview(dispatch, review, rating, reviewId, albumId);
+    } else {
+      createReview(dispatch, review, rating, albumId);
+    }
     setReview("");
+    setRating(0);
     props.onHide();
   };
 

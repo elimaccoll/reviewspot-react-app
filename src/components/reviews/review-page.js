@@ -5,6 +5,7 @@ import ReviewStats from "./review-stats";
 import CommentList from "../comments/comment-list";
 import CreateCommentModal from "../comments/create-comment-modal";
 import CreateReportModal from "../report/create-report-modal";
+import CreateReviewModal from "./create-review-modal";
 import RatingBar from "../rating-bar/rating-bar";
 import {
   findReviewById,
@@ -28,6 +29,10 @@ const ReviewPage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const hideLoginModal = () => setShowLogin(false);
   const showLoginModal = () => setShowLogin(true);
+
+  const [showEdit, setShowEdit] = useState(false);
+  const hideEditModal = () => setShowEdit(false);
+  const showEditModal = () => setShowEdit(true);
 
   const dispatch = useDispatch();
 
@@ -80,6 +85,13 @@ const ReviewPage = () => {
   return (
     <div>
       <CreateCommentModal show={modalShow} onHide={() => hideModal()} />
+      <CreateReviewModal
+        show={showEdit}
+        onHide={() => hideEditModal()}
+        edit={true}
+        rating={reviewInfo && reviewInfo.rating.rating}
+        review={reviewInfo && reviewInfo.content}
+      />
       <CreateReportModal show={reportShow} onHide={() => hideReport()} />
       <LoginModal
         show={showLogin}
@@ -113,7 +125,7 @@ const ReviewPage = () => {
                   className={`clickable fa-solid fa-edit me-3 ${
                     loggedIn && userIsAuthor ? "d-inline" : "d-none"
                   }`}
-                  onClick={() => console.log("Edit review")}
+                  onClick={() => showEditModal()}
                 />
                 <i
                   className={`clickable fa-solid fa-close me-3 ${
