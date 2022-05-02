@@ -160,7 +160,7 @@ const ReviewPage = () => {
                 reviewInfo && reviewInfo.rating && reviewInfo.rating.rating
               }
             />
-            <div>{reviewInfo && reviewInfo.content}</div>
+            <div id="review-content">{reviewInfo && reviewInfo.content}</div>
             <ReviewStats
               review={reviewInfo && reviewInfo}
               numComments={numComments}
