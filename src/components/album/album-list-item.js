@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const AlbumListItem = ({ album }) => {
   const albumId = album.id;
   const numReviews = album && album.numReviews;
+  const avgRating = album && album.avgRating;
 
   return (
     <Link className="album-list-item " to={`/album/${albumId}`}>
@@ -25,9 +26,11 @@ const AlbumListItem = ({ album }) => {
               {album && createArtistsString(album.artists)}
             </div>
             <AlbumStats album={album} numReviews={numReviews} />
-            <div className="d-block">
-              <RatingBar rating={album.avgRating} />
-            </div>
+            { avgRating ?
+                (<div className="d-block">
+                  <RatingBar rating={album.avgRating} />
+                </div>) : 
+                ( <span className="text-muted">No ratings available.</span> )}
           </div>
         </div>
       </div>
