@@ -12,7 +12,6 @@ import {
 const reviewsReducer = (state = [], action) => {
   switch (action.type) {
     case EDIT_REVIEW:
-      console.log(action);
       const editedReview = action.updatedReview.updatedReview;
       const withEditedReview = state.reviews.reviews.map((review) =>
         review._id === editedReview._id ? editedReview : review

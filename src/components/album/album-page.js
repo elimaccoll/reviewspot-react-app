@@ -15,12 +15,19 @@ const AlbumPage = () => {
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
 
-  useEffect(() => findAlbum(dispatch, albumId), [albumId]);
-  useEffect(() => findAlbumReviews(dispatch, albumId), [albumId]);
   const album = useSelector((state) => state.albums);
   const reviewState = useSelector((state) => state.reviews);
   const reviews = reviewState.reviews ? reviewState.reviews : null;
-  const numReviews = reviews && reviews.total;
+
+  useEffect(() => findAlbum(dispatch, albumId), [albumId, reviewState]);
+  useEffect(() => findAlbumReviews(dispatch, albumId), [albumId]);
+
+  const numReviews =
+    reviews && reviews.total
+      ? reviews.total
+      : reviews && reviews.reviews.length;
+
+  console.log(album);
 
   const alreadyReviewed =
     reviews && reviews.reviews && loggedIn

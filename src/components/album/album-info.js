@@ -41,7 +41,7 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
       <CreateReviewModal
         show={showReview}
         onHide={() => hideReviewModal()}
-        edit={alreadyReviewed !== false}
+        edit={alreadyReviewed}
         rating={alreadyReviewed && alreadyReviewed.rating.rating}
         review={alreadyReviewed && alreadyReviewed.content}
         reviewId={alreadyReviewed && alreadyReviewed._id}
@@ -65,11 +65,11 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
             {albumInfo && createArtistsString(albumInfo.artists)}
           </div>
           <AlbumStats album={albumInfo} numReviews={numReviews} />
-          {
-            albumInfo && albumInfo.avgRating ?
-            <RatingBar rating={albumInfo && albumInfo.avgRating} /> :
-            <span className="text-muted">No ratings available.</span> 
-          }
+          {albumInfo && albumInfo.avgRating >= 0 ? (
+            <RatingBar rating={albumInfo && albumInfo.avgRating} />
+          ) : (
+            <span className="text-muted">No ratings available.</span>
+          )}
           <div className={"d-md-none d-flex justify-content-end"}>
             {WriteReviewButton()}
           </div>

@@ -11,6 +11,7 @@ const CreateReviewModal = (props) => {
   const [review, setReview] = useState("");
   const loadRating = props.rating ? props.rating : 0;
   const loadReview = props.review ? props.review : "";
+
   useEffect(() => {
     setRating(loadRating);
     setReview(loadReview);
@@ -19,14 +20,19 @@ const CreateReviewModal = (props) => {
   const handleRating = (userRating) => {
     setRating(userRating);
   };
+
   const dispatch = useDispatch();
   const createReviewHandler = () => {
     if (props.edit) {
-      if (reviewId) editReview(dispatch, review, rating, reviewId, albumId);
-      else editReview(dispatch, review, rating, props.reviewId, albumId);
+      if (reviewId) {
+        editReview(dispatch, review, rating, reviewId, albumId);
+      } else {
+        editReview(dispatch, review, rating, props.reviewId, albumId);
+      }
     } else {
       createReview(dispatch, review, rating, albumId);
     }
+
     setReview("");
     setRating(0);
     props.onHide();
@@ -72,7 +78,7 @@ const CreateReviewModal = (props) => {
           className="btn btn-success"
           onClick={() => createReviewHandler()}
         >
-          Create
+          {props.edit ? "Save" : "Create"}
         </button>
       </Modal.Footer>
     </Modal>
