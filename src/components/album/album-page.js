@@ -27,8 +27,6 @@ const AlbumPage = () => {
       ? reviews.total
       : reviews && reviews.reviews.length;
 
-  console.log(album);
-
   const alreadyReviewed =
     reviews && reviews.reviews && loggedIn
       ? userAlreadyReviewedAlbum(reviews.reviews, userInfo._id)

@@ -61,8 +61,9 @@ const CommentListItem = ({ comment }) => {
             >
               <span className="text-muted me-1">Comment by</span>
               <span>{comment && authorInfo.authorName}</span>
-              {authorInfo && authorInfo.authorRole === "moderator" &&
-              <span className="badge bg-primary me-1 ms-1">Moderator</span> }
+              {authorInfo && authorInfo.authorRole === "moderator" && (
+                <span className="badge bg-primary me-1 ms-1">Moderator</span>
+              )}
             </Link>
             <div className={`${loggedIn ? "d-inline" : "d-none"}`}>
               {/* <i
@@ -71,7 +72,7 @@ const CommentListItem = ({ comment }) => {
               /> */}
               <i
                 className={`clickable fa-solid fa-flag me-3 ${
-                  loggedIn /* && !userIsAuthor */ ? "d-inline" : "d-none"
+                  loggedIn && !userIsAuthor ? "d-inline" : "d-none"
                 }`}
                 data-bs-toggle="modal"
                 data-bs-target="#create-report-modal"

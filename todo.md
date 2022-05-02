@@ -1,6 +1,7 @@
 CLEAR DATABASE
 
-[] Reviews don't disappear on delete
+[x] Reviews don't disappear on delete after editing them
+[] Can only rate 0 if you don't click when creating a new review
 [x] album title disappears on review edit
 [x] moderator badge doesn't always render
 [x] bug in album-info that stopped comments from being written
