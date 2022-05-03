@@ -23,8 +23,6 @@ const Home = () => {
   const popularReviews = reviewState.reviews && reviewState.reviews.reviews;
   useEffect(() => findPopularReviews(dispatch), []);
 
-  console.log(popularReviews);
-
   return (
     <div className="mt-2">
       <div className="row">

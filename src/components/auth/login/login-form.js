@@ -3,7 +3,7 @@ import { login } from "../../../actions/user-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
@@ -15,17 +15,23 @@ const LoginForm = () => {
     const toastOptions = {
       position: toast.POSITION.TOP_CENTER,
       pauseOnHover: false,
-      theme: "dark"
+      theme: "dark",
     };
     login(dispatch, credentials.username, credentials.password)
-    .then()
-    .catch((error) => {
-      if (error.response.status < 500) {
-        toast("Incorrect username or password. Please try again.", toastOptions);
-      } else {
-        toast("An internal server error has occurred. Please try again or contact a site contributor.", toastOptions);
-      }
-    });
+      .then()
+      .catch((error) => {
+        if (error.response.status < 500) {
+          toast(
+            "Incorrect username or password. Please try again.",
+            toastOptions
+          );
+        } else {
+          toast(
+            "An internal server error has occurred. Please try again or contact a site contributor.",
+            toastOptions
+          );
+        }
+      });
   };
 
   const userInfo = useSelector((state) => state.user);

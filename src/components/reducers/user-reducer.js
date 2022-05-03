@@ -8,10 +8,6 @@ import {
   IS_LOGGED_IN,
   GET_USER,
 } from "../../actions/user-actions";
-import moment from "moment";
-
-// const loggedInUntil = localStorage.getItem("loggedInUntil");
-// const loggedIn = loggedInUntil && moment(loggedInUntil) >= moment();
 
 const userReducer = (
   state = {
@@ -28,22 +24,24 @@ const userReducer = (
     case IS_LOGGED_IN:
       const isLoggedInInfo = action.response;
       if (!isLoggedInInfo.loggedIn) {
-        return (state = {
+        state = {
           bio: "",
           banned: false,
           loggedIn: false,
           role: "",
           username: "",
           _id: "",
-        });
+        };
+      } else {
+        state = {
+          ...state,
+          loggedIn: isLoggedInInfo.loggedIn,
+          role: isLoggedInInfo.userInfo.role,
+          username: isLoggedInInfo.userInfo.username,
+          _id: isLoggedInInfo.userInfo._id,
+        };
       }
-      return (state = {
-        ...state,
-        loggedIn: isLoggedInInfo.loggedIn,
-        role: isLoggedInInfo.userInfo.role,
-        username: isLoggedInInfo.userInfo.username,
-        _id: isLoggedInInfo.userInfo._id,
-      });
+      return state;
     case LOGIN:
       const loginInfo = action.response;
       const loginState = {

@@ -79,7 +79,6 @@ const reviewsReducer = (state = [], action) => {
       };
       return state;
     case FIND_POPULAR_REVIEWS:
-      console.log(action.reviews);
       state = {
         reviews: { reviews: action.reviews },
       };

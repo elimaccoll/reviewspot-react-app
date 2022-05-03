@@ -3,17 +3,23 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { dismissReport, getCommentByURI } from "../../actions/reports-actions";
 import { useDispatch, useSelector } from "react-redux";
+import { banUser } from "../../services/user-services";
+import { findReviewById } from "../../services/reviews-services";
 
 const ReportListItem = ({ report }) => {
   const dispatch = useDispatch();
-  const handleBan = () => {
-    return;
-  };
+  console.log(report);
+
   const handleDismiss = () => {
     dismissReport(dispatch, report._id);
   };
 
   const contentType = report && report.contentType;
+
+  const handleBan = () => {
+    // TODO: Need to get userId
+    // banUser(dispatch);
+  };
 
   useEffect(() => {
     if (contentType === "comment") getCommentByURI(dispatch, report.uri);

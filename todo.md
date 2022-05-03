@@ -1,15 +1,18 @@
 CLEAR DATABASE
 
+MERGE BUGS
+
 [x] Reviews don't disappear on delete after editing them
-[] Can only rate 0 if you don't click when creating a new review
+[] Can only rate 0 if you don't click the rating when creating a new review
 [x] album title disappears on review edit
 [x] moderator badge doesn't always render
 [x] bug in album-info that stopped comments from being written
 [x] editing review on album page makes number of reviews go away
 [x] avgRating always comes back null
 [x] updating ratings is one step behind
+[] Liking review updates the Update time
 
-Actually Do:
+TODO:
 
 [x] REDO REVIEW REDUCER
 [x] FIX LIKES
@@ -56,11 +59,10 @@ Actually Do:
 [] Checking if user is banned
 [] Redirecting from pages users do not have permission for
 [] - General user cant access reports page
-[] - Logged in users should access login or register page
+[x] - Logged in users cant access login or register page
 [x] Add a Review popularity bar (confusing with just the spotify popularity bar)
 [] Pagination
 [X] Role badges
 [x] Toast messages
 [] Clean up styling for AlbumListItem -- album title, artist, and responsiveness of image
 [] Navbar responsiveness is a little weird
-[] The back button doesn't rerender the page
