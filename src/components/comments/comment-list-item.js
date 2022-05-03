@@ -78,7 +78,9 @@ const CommentListItem = ({ comment }) => {
               ></i>
               <i
                 className={`clickable fa-solid fa-close me-3 ${
-                  loggedIn && userIsAuthor ? "d-inline" : "d-none"
+                  loggedIn && (userIsAuthor || moderator)
+                    ? "d-inline"
+                    : "d-none"
                 }`}
                 onClick={() => deleteCommentHandler()}
               />

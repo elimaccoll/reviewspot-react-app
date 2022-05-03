@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { dismissReport, getCommentByURI } from "../../actions/reports-actions";
 import { useDispatch, useSelector } from "react-redux";
-import { banUser } from "../../services/user-services";
-import { findReviewById } from "../../services/reviews-services";
+import { banUser } from "../../actions/reports-actions";
 
 const ReportListItem = ({ report }) => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const ReportListItem = ({ report }) => {
 
   const handleBan = () => {
     // TODO: Need to get userId
-    // banUser(dispatch);
+    // banUser(dispatch, "", report.authorId);
   };
 
   useEffect(() => {

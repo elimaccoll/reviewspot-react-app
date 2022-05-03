@@ -18,9 +18,9 @@ export const deleteUser = async (user) => {
   return response.data;
 };
 
-// TODO: not really sure how this works
-export const banUser = async (user) => {
-  // TODO: Using a post for now? like appending to a ban list
-  const response = await axios.post(`${API_BASE}/user/${user._id}/`, user);
+export const banUser = async (reason, userId) => {
+  const response = await axios.put(`${API_BASE}/user/${userId}/ban`, {
+    reason: reason,
+  });
   return response.data;
 };

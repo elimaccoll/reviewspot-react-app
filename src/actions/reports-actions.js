@@ -59,10 +59,10 @@ export const getBanAudits = async (dispatch, reason, reviewId, albumId) => {
 };
 
 export const banUser = async (dispatch, reason, userId) => {
-  const user = await service.banUser(reason, userId);
+  const banAudit = await service.banUser(reason, userId);
   dispatch({
     type: BAN_USER,
-    user,
+    banAudit,
   });
 };
 
