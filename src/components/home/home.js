@@ -4,14 +4,16 @@ import ReviewList from "../reviews/review-list";
 import { useDispatch, useSelector } from "react-redux";
 import { findHomeAlbums } from "../../actions/albums-actions";
 import { isLoggedIn } from "../../actions/user-actions";
-import {
-  findPopularReviews,
-  findUserReviews,
-} from "../../actions/reviews-actions";
+import { findPopularReviews } from "../../actions/reviews-actions";
+import { ToastContainer, toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
-
+  const { state } = useLocation();
+  const redirectMessage = (state && state.redirectMessage) || null;
+  console.log("Redirect Message: " + redirectMessage || "null");
+  useEffect(() => redirectMessage && displayToastMessage(redirectMessage), []);
   useEffect(() => isLoggedIn(dispatch), []);
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
@@ -22,6 +24,16 @@ const Home = () => {
   const reviewState = useSelector((state) => state.reviews);
   const popularReviews = reviewState.reviews && reviewState.reviews.reviews;
   useEffect(() => findPopularReviews(dispatch), []);
+
+  const displayToastMessage = (message) => {
+    console.log("Attempting to display redirect message.");
+    const toastOptions = {
+      position: toast.POSITION.TOP_CENTER,
+      pauseOnHover: false,
+      theme: "dark",
+    };
+    toast(message, toastOptions);
+  };
 
   return (
     <div className="mt-2">
@@ -38,6 +50,7 @@ const Home = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
