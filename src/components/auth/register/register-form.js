@@ -99,7 +99,6 @@ const RegisterForm = () => {
       <button className="btn btn-success w-25" onClick={() => handleRegister()}>
         Register
       </button>
-      <ToastContainer />
     </div>
   );
 };
