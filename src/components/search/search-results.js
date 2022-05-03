@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import AlbumList from "../album/album-list";
 import { findSearchAlbums } from "../../actions/albums-actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchResults = () => {
-  const { search } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get("q");
+  console.log(searchParams);
   const dispatch = useDispatch();
   const albums = useSelector((state) => state.albums);
   useEffect(() => findSearchAlbums(dispatch, search), [search]);

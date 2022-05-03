@@ -21,7 +21,7 @@ const SearchBar = () => {
       displayToastMessage("Please enter a valid search query.");
       return;
     }
-    navigate(`/search/${query}`);
+    navigate(`/search?q=${query}`);
     setSearch("");
   };
   return (

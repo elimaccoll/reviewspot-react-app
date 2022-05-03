@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" exact={true} element={<ReviewSpot />}>
             <Route index exact={true} element={<Home />} />
-            <Route path="search/:search" exact={true} element={<Search />} />
+            <Route path="search" exact={true} element={<Search />} />
             <Route path="login/" exact={true} element={<Login />} />
             <Route path="register/" exact={true} element={<Register />} />
             <Route path="reports/" exact={true} element={<ReportDashboard />} />
