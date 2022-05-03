@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { likeReview } from "../../actions/reviews-actions";
 import LoginModal from "../auth/login/login-modal";
+import { bannedRedirect } from "../helpers/auth";
 import { alreadyLikedByUser } from "../helpers/reviews";
 
 const ReviewStats = ({ review, numComments, linkComments = true }) => {
@@ -21,8 +22,16 @@ const ReviewStats = ({ review, numComments, linkComments = true }) => {
   const hideLoginModal = () => setShowLogin(false);
   const showLoginModal = () => setShowLogin(true);
 
+  const navigate = useNavigate();
   const likeReviewHandler = () => {
-    likeReview(dispatch, reviewId, albumId, userInfo._id);
+    likeReview(dispatch, reviewId, albumId, userInfo._id).catch((error) => {
+      const permissionDenied = error.response && error.response.status === 403;
+      if (permissionDenied) {
+        bannedRedirect(navigate);
+      } else {
+        //TODO: Render a toast message on this
+      }
+    });
   };
 
   return (

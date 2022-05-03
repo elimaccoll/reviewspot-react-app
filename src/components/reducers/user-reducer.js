@@ -1,12 +1,10 @@
 import {
-  BAN_USER,
   DELETE_USER,
   EDIT_BIO,
   LOGIN,
   LOGOUT,
   REGISTER,
   IS_LOGGED_IN,
-  GET_USER,
 } from "../../actions/user-actions";
 
 const userReducer = (
@@ -79,8 +77,6 @@ const userReducer = (
       state = { ...state, bio: action.bio };
       return state;
     case DELETE_USER:
-      return;
-    case BAN_USER:
       return;
     default:
       return state;

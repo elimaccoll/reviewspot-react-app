@@ -11,3 +11,9 @@ const submitRequest = async (operation, options) => {
     }
   }
 };
+
+export const bannedRedirect = (navigate) => {
+  const redirectMessage = "Account has been banned by a moderator";
+  navigate("/", { state: { redirectMessage } });
+  navigate(0);
+};

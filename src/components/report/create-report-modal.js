@@ -1,19 +1,39 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { reportComment, reportReview } from "../../actions/reports-actions";
+import { bannedRedirect } from "../helpers/auth";
 
 const CreateReportModal = (props) => {
   const [reason, setReason] = useState("");
   const { albumId, reviewId } = useParams();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const createReportHandler = () => {
-    if (props.review) reportReview(dispatch, reason, reviewId, albumId);
-    else if (props.comment) {
-      reportComment(dispatch, reason, reviewId, albumId, props.commentId);
-      console.log(props.commentId);
+    if (props.review) {
+      reportReview(dispatch, reason, reviewId, albumId).catch((error) => {
+        const permissionDenied =
+          error.response && error.response.status === 403;
+        if (permissionDenied) {
+          bannedRedirect(navigate);
+        } else {
+          //TODO: Render a toast message on this
+        }
+      });
+    } else if (props.comment) {
+      reportComment(dispatch, reason, reviewId, albumId, props.commentId).catch(
+        (error) => {
+          const permissionDenied =
+            error.response && error.response.status === 403;
+          if (permissionDenied) {
+            bannedRedirect(navigate);
+          } else {
+            //TODO: Render a toast message on this
+          }
+        }
+      );
     }
     setReason("");
     props.onHide();

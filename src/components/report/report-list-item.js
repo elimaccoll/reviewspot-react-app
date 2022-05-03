@@ -7,7 +7,6 @@ import { banUser } from "../../actions/reports-actions";
 
 const ReportListItem = ({ report }) => {
   const dispatch = useDispatch();
-  console.log(report);
 
   const handleDismiss = () => {
     dismissReport(dispatch, report._id);
@@ -16,8 +15,7 @@ const ReportListItem = ({ report }) => {
   const contentType = report && report.contentType;
 
   const handleBan = () => {
-    // TODO: Need to get userId
-    // banUser(dispatch, "", report.authorId);
+    banUser(dispatch, "Ban Hammer", report.authorId);
   };
 
   useEffect(() => {

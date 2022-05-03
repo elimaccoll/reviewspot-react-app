@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createCommentOnReview } from "../../actions/reviews-actions";
+import { bannedRedirect } from "../helpers/auth";
 
 const CreateCommentModal = (props) => {
   const [comment, setComment] = useState("");
   const { albumId, reviewId } = useParams();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const createCommentHandler = () => {
-    createCommentOnReview(dispatch, reviewId, albumId, comment);
+    createCommentOnReview(dispatch, reviewId, albumId, comment).catch(
+      (error) => {
+        const permissionDenied =
+          error.response && error.response.status === 403;
+        if (permissionDenied) {
+          bannedRedirect(navigate);
+        } else {
+          //TODO: Render a toast message on this
+        }
+      }
+    );
     setComment("");
     props.onHide();
   };

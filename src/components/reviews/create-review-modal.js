@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
 import { createReview, editReview } from "../../actions/reviews-actions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { bannedRedirect } from "../helpers/auth";
 
 const CreateReviewModal = (props) => {
   const { albumId, reviewId } = useParams();
@@ -22,15 +23,44 @@ const CreateReviewModal = (props) => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const createReviewHandler = () => {
     if (props.edit) {
       if (reviewId) {
-        editReview(dispatch, review, rating, reviewId, albumId);
+        editReview(dispatch, review, rating, reviewId, albumId).catch(
+          (error) => {
+            const permissionDenied =
+              error.response && error.response.status === 403;
+            if (permissionDenied) {
+              bannedRedirect(navigate);
+            } else {
+              //TODO: Render a toast message on this
+            }
+          }
+        );
       } else {
-        editReview(dispatch, review, rating, props.reviewId, albumId);
+        editReview(dispatch, review, rating, props.reviewId, albumId).catch(
+          (error) => {
+            const permissionDenied =
+              error.response && error.response.status === 403;
+            if (permissionDenied) {
+              bannedRedirect(navigate);
+            } else {
+              //TODO: Render a toast message on this
+            }
+          }
+        );
       }
     } else {
-      createReview(dispatch, review, rating, albumId);
+      createReview(dispatch, review, rating, albumId).catch((error) => {
+        const permissionDenied =
+          error.response && error.response.status === 403;
+        if (permissionDenied) {
+          bannedRedirect(navigate);
+        } else {
+          //TODO: Render a toast message on this
+        }
+      });
     }
 
     setReview("");
