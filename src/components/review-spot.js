@@ -10,6 +10,7 @@ import commentsReducer from "./reducers/comments-reducer";
 import profileReducer from "./reducers/profile-reducer";
 import reportReducer from "./reducers/report-reducer";
 import Navbar from "./navbar/navbar";
+import { ToastContainer } from "react-toastify";
 
 // TODO: update store contents
 const reducer = combineReducers({
@@ -30,6 +31,7 @@ const ReviewSpot = () => {
       <div className="row mt-2">
         <Outlet />
       </div>
+      <ToastContainer />
     </Provider>
   );
 };

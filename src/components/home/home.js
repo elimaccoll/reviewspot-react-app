@@ -50,7 +50,6 @@ const Home = () => {
           )}
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

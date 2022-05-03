@@ -79,7 +79,6 @@ const LoginForm = () => {
       <button className="btn btn-success w-25" onClick={() => handleLogin()}>
         Log in
       </button>
-      <ToastContainer />
     </div>
   );
 };
