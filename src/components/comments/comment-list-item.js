@@ -47,7 +47,7 @@ const CommentListItem = ({ comment }) => {
               `https://avatars.dicebear.com/api/pixel-art/${authorInfo.authorId}.svg`
             }
             className="rs-img-128 img-fluid rs-profile-pic"
-            alt="Profile Picture"
+            alt="Profile"
             onClick={() => goToUserProfile()}
           />
         </div>

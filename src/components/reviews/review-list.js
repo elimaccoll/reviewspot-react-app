@@ -20,8 +20,8 @@ const ReviewList = ({ reviews }) => {
     <div>
       <ul className="list-group mt-2">
         {reviewsList &&
-          reviewsList.map((review) => {
-            return <ReviewListItem review={review} />;
+          reviewsList.map((review, ind) => {
+            return <ReviewListItem review={review} key={ind} />;
           })}
       </ul>
     </div>

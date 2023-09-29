@@ -5,15 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { findHomeAlbums } from "../../actions/albums-actions";
 import { isLoggedIn } from "../../actions/user-actions";
 import { findPopularReviews } from "../../actions/reviews-actions";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import { cookieTest } from "../../services/auth-services";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { state } = useLocation();
-  const redirectMessage = (state && state.redirectMessage) || null;
-  console.log("Redirect Message: " + redirectMessage || "null");
-  useEffect(() => redirectMessage && displayToastMessage(redirectMessage), []);
+  // const { state } = useLocation();
+  // const redirectMessage = (state && state.redirectMessage) || null;
+  // console.log("Redirect Message: " + redirectMessage || "null");
+  // useEffect(() => redirectMessage && displayToastMessage(redirectMessage), []);
   useEffect(() => isLoggedIn(dispatch), []);
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
@@ -34,7 +35,6 @@ const Home = () => {
     };
     toast(message, toastOptions);
   };
-
   return (
     <div className="mt-2">
       <div className="row">

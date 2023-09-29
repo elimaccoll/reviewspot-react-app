@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { isLoggedIn } from "../../../actions/user-actions";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
@@ -37,7 +38,11 @@ const LoginForm = () => {
   const userInfo = useSelector((state) => state.user);
   const navigate = useNavigate();
   useEffect(() => {
-    if (userInfo.loggedIn) navigate("/");
+    if (userInfo.loggedIn) {
+      // console.log("LOGGED IN !");
+      // TODO: Logged in Toast message
+      navigate("/");
+    }
   });
 
   return (

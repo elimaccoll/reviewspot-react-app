@@ -1,8 +1,12 @@
 import axios from "axios";
 import { API_BASE } from "./constants";
 
+// TODO: Error handling for these
+
 export const isLoggedIn = async () => {
-  const response = await axios.get(`${API_BASE}/auth/isLoggedIn`);
+  const response = await axios.get(`${API_BASE}/auth/isLoggedIn`, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
@@ -11,6 +15,7 @@ export const login = async (username, password) => {
     username: username,
     password: password,
   });
+  console.log(response);
   return response.data;
 };
 

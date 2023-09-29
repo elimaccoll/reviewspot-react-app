@@ -19,8 +19,8 @@ const AlbumList = ({ albums } /*, prev, next} */) => {
   return (
     <ul className="list-group mt-3">
       {albumList &&
-        albumList.map((album) => {
-          return <AlbumListItem album={album} />;
+        albumList.map((album, ind) => {
+          return <AlbumListItem album={album} key={ind} />;
         })}
       <div className="bg-light d-flex justify-content-around">
         <i

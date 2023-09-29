@@ -47,7 +47,9 @@ const ReviewListItem = ({ review }) => {
             >
               <span className="text-muted me-1">Review by</span>
               <span>{authorInfo.authorName}</span>
-              {(authorInfo.authorRole === "moderator") && <span className="badge bg-primary me-1 ms-1">Moderator</span>}
+              {authorInfo.authorRole === "moderator" && (
+                <span className="badge bg-primary me-1 ms-1">Moderator</span>
+              )}
             </Link>
           </div>
           <Link
@@ -55,10 +57,10 @@ const ReviewListItem = ({ review }) => {
             to={`/album/${albumId}/review/${review._id}`}
           >
             <div className={`${onAlbumPage ? "d-none" : "d-block"}`}>
-              <Link className="review-list-item" to={`/album/${albumId}`}>
-                <span className="text-muted">Album: </span>
-                <span>{review && review.albumName}</span>
-              </Link>
+              {/* <Link className="text-white" to={`/album/${albumId}`}> */}
+              <span className="text-muted">Album: </span>
+              <span>{review && review.albumName}</span>
+              {/* </Link> */}
             </div>
 
             <RatingBar rating={review.rating.rating} />
