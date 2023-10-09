@@ -13,7 +13,7 @@ export const IS_LOGGED_IN = "IS_LOGGED_IN";
 
 export const isLoggedIn = async (dispatch) => {
   const response = await auth_service.isLoggedIn();
-  console.log(response);
+  // console.log(response);
   dispatch({
     type: IS_LOGGED_IN,
     response,

@@ -21,11 +21,11 @@ const ProfilePage = () => {
 
   const dispatch = useDispatch();
   // console.log(userId);
-  useEffect(() => findUserById(dispatch, userId), [userId]);
+  useEffect(() => findUserById(dispatch, userId), [dispatch, userId]);
   const userProfile = useSelector((state) => state.profile);
   // console.log(userProfile);
 
-  useEffect(() => findUserReviews(dispatch, userId), [userId]);
+  useEffect(() => findUserReviews(dispatch, userId), [dispatch, userId]);
   const reviewState = useSelector((state) => state.reviews);
   const userReviews = reviewState.reviews ? reviewState.reviews : [];
   // console.log(userReviews);
@@ -40,17 +40,14 @@ const ProfilePage = () => {
         <EditBioModal show={showBio} onHide={() => hideBioModal()} />
         <div className="col-3 d-flex justify-content-center align-items-center">
           <img
-            src={`https://avatars.dicebear.com/api/pixel-art/${userId}.svg`}
-            alt="Profile Pic"
+            src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${userId}`}
+            alt="Avatar"
             className="img-fluid rounded"
           />
         </div>
         <div className="col-9">
           <h1>{userProfile.userInfo && userProfile.userInfo.username}</h1>
-          {
-            moderator &&
-            <div className="badge bg-primary">Moderator</div>
-          }
+          {moderator && <div className="badge bg-primary">Moderator</div>}
           <div className="text-muted">
             Joined:{" "}
             {userProfile.userInfo &&
