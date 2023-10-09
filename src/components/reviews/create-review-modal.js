@@ -13,6 +13,8 @@ const CreateReviewModal = (props) => {
   const loadRating = props.rating ? props.rating : 0;
   const loadReview = props.review ? props.review : "";
 
+  const { show, onHide, ...rest } = props;
+
   useEffect(() => {
     setRating(loadRating);
     setReview(loadReview);
@@ -75,7 +77,13 @@ const CreateReviewModal = (props) => {
   };
 
   return (
-    <Modal {...props} backdrop="static" keyboard={false} centered>
+    <Modal
+      show={show}
+      onHide={onHide}
+      backdrop="static"
+      keyboard={false}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>{props.edit ? "Edit Review" : "Write Review"}</Modal.Title>
       </Modal.Header>
