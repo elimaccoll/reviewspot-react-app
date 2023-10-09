@@ -27,29 +27,29 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-light rounded">
       <div className="container-fluid">
-        <a className="navbar-brand text-black" href="/">
+        <Link className="navbar-brand text-black" to={`/`}>
           ReviewSpot
-        </a>
+        </Link>
 
         <ul className="navbar-nav me-auto">
           <li className="nav-item">
-            <a className="nav-link text-black active text-center" href="/">
+            <Link className="nav-link text-black active text-center" to={`/`}>
               Home
-            </a>
+            </Link>
           </li>
           <li
             className={`nav-item ${
               loggedIn && moderator ? "d-inline" : "d-none"
             }`}
           >
-            <a
+            <Link
               className="nav-link text-black active text-center"
-              href="/reports/"
+              to={`/reports/`}
             >
               Reports
-            </a>
+            </Link>
           </li>
         </ul>
         <SearchBar />
