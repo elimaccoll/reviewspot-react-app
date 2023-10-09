@@ -12,6 +12,7 @@ import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
 import Search from "./components/search/search-results";
 import ReportDashboard from "./components/report/report-dashboard";
+import RedirectPage from "./components/redirect/redirect";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <div className="container p-0">
         <Routes>
           <Route path="/" exact={true} element={<ReviewSpot />}>
+            <Route path="*" element={<RedirectPage />} />
             <Route index exact={true} element={<Home />} />
             <Route path="search" exact={true} element={<Search />} />
             <Route path="login/" exact={true} element={<Login />} />

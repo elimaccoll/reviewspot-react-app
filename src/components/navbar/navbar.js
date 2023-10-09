@@ -25,7 +25,6 @@ const Navbar = () => {
   const handleLogout = () => {
     logout(dispatch);
   };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-light rounded">
       <div className="container-fluid">
