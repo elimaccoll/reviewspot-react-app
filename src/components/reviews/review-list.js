@@ -1,6 +1,5 @@
 import React from "react";
 import ReviewListItem from "./review-list-item";
-import { useSelector } from "react-redux";
 
 const ReviewList = ({ reviews }) => {
   // console.log(reviews);

@@ -16,8 +16,8 @@ const CommentList = ({ comments }) => {
   return (
     <ul className="list-group mt-2">
       {comments &&
-        comments.map((comment) => {
-          return <CommentListItem comment={comment} />;
+        comments.map((comment, ind) => {
+          return <CommentListItem comment={comment} key={ind} />;
         })}
       <div className="bg-light d-flex justify-content-around">
         <i
