@@ -66,3 +66,9 @@ TODO:
 [x] Toast messages
 [] Clean up styling for AlbumListItem -- album title, artist, and responsiveness of image
 [] Navbar responsiveness is a little weird
+
+NEW STUFF
+[] - Indicate a post has been reported by you (hide it?)
+[] - Fix going to profile from comment author
+[] - Fix reports page - weird for comments
+[] - auto redirect for page not found
