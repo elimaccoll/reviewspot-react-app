@@ -16,7 +16,7 @@ import ReportDashboard from "./components/report/report-dashboard";
 function App() {
   return (
     <Router>
-      <div className="container">
+      <div className="container p-0">
         <Routes>
           <Route path="/" exact={true} element={<ReviewSpot />}>
             <Route index exact={true} element={<Home />} />

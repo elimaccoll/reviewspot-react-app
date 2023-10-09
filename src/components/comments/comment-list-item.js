@@ -44,7 +44,7 @@ const CommentListItem = ({ comment }) => {
           <img
             src={
               authorInfo &&
-              `https://avatars.dicebear.com/api/pixel-art/${authorInfo.authorId}.svg`
+              `https://api.dicebear.com/7.x/pixel-art/svg?seed=${authorInfo.authorId}`
             }
             className="rs-img-128 img-fluid rs-profile-pic"
             alt="Profile"

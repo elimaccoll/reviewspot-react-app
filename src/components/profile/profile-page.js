@@ -35,59 +35,61 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="bg-dark p-2">
-      <div className="row">
-        <EditBioModal show={showBio} onHide={() => hideBioModal()} />
-        <div className="col-3 d-flex justify-content-center align-items-center">
-          <img
-            src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${userId}`}
-            alt="Avatar"
-            className="img-fluid rounded"
-          />
-        </div>
-        <div className="col-9">
-          <h1>{userProfile.userInfo && userProfile.userInfo.username}</h1>
-          {moderator && <div className="badge bg-primary">Moderator</div>}
-          <div className="text-muted">
-            Joined:{" "}
-            {userProfile.userInfo &&
-              moment(userProfile.userInfo.joinedOn).format("MMMM Do, YYYY")}
+    <div>
+      <div className="bg-dark p-2">
+        <div className="row">
+          <EditBioModal show={showBio} onHide={() => hideBioModal()} />
+          <div className="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${userId}`}
+              alt="Avatar"
+              className="img-fluid rounded"
+            />
           </div>
-          <div>Reviews: {userProfile && userProfile.numReviews}</div>
-          <div>Comments: {userProfile && userProfile.numComments}</div>
-          <hr />
-          <p id="user-bio">
-            {userProfile.userInfo && userProfile.userInfo.bio}
-          </p>
+          <div className="col-9">
+            <h1>{userProfile.userInfo && userProfile.userInfo.username}</h1>
+            {moderator && <div className="badge bg-primary">Moderator</div>}
+            <div className="text-muted">
+              Joined:{" "}
+              {userProfile.userInfo &&
+                moment(userProfile.userInfo.joinedOn).format("MMMM Do, YYYY")}
+            </div>
+            <div>Reviews: {userProfile && userProfile.numReviews}</div>
+            <div>Comments: {userProfile && userProfile.numComments}</div>
+            <hr />
+            <p id="user-bio">
+              {userProfile.userInfo && userProfile.userInfo.bio}
+            </p>
+          </div>
         </div>
-      </div>
-      <div
-        className={`d-flex justify-content-end ${
-          loggedIn && (owner || moderator) ? "d-flex" : "d-none"
-        }`}
-      >
-        <button
-          className={`btn btn-block btn-info ${
-            loggedIn && owner ? "d-block" : "d-none"
+        <div
+          className={`d-flex justify-content-end ${
+            loggedIn && (owner || moderator) ? "d-flex" : "d-none"
           }`}
-          onClick={() => {
-            if (loggedIn && owner) showBioModal();
-          }}
-          data-bs-toggle="modal"
-          data-bs-target="#edit-bio-modal"
         >
-          Edit Bio
-        </button>
-        <button
-          className={`btn btn-block btn-danger ms-2 ${
-            loggedIn && moderator && !owner ? "d-block" : "d-none"
-          }`}
-          onClick={() => handleBanUser()}
-        >
-          Ban User
-        </button>
+          <button
+            className={`btn btn-block btn-info ${
+              loggedIn && owner ? "d-block" : "d-none"
+            }`}
+            onClick={() => {
+              if (loggedIn && owner) showBioModal();
+            }}
+            data-bs-toggle="modal"
+            data-bs-target="#edit-bio-modal"
+          >
+            Edit Bio
+          </button>
+          <button
+            className={`btn btn-block btn-danger ms-2 ${
+              loggedIn && moderator && !owner ? "d-block" : "d-none"
+            }`}
+            onClick={() => handleBanUser()}
+          >
+            Ban User
+          </button>
+        </div>
+        <ReviewList reviews={userReviews} />
       </div>
-      <ReviewList reviews={userReviews} />
     </div>
   );
 };

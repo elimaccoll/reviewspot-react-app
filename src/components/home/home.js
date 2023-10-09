@@ -36,7 +36,7 @@ const Home = () => {
     toast(message, toastOptions);
   };
   return (
-    <div className="mt-2">
+    <div>
       <div className="row">
         <div className="col-12 col-lg-8">
           <AlbumList albums={albums} />

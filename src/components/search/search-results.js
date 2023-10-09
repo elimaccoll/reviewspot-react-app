@@ -13,7 +13,7 @@ const SearchResults = () => {
   useEffect(() => findSearchAlbums(dispatch, search), [search]);
 
   return (
-    <div className="mt-2">
+    <div>
       <AlbumList albums={albums} />
     </div>
   );
