@@ -17,7 +17,6 @@ const ReviewListItem = ({ review }) => {
   const numComments = review && review.numComments;
 
   // console.log(review);
-
   const goToUserProfile = () => {
     navigate(`/user/${authorInfo.authorId}`);
   };

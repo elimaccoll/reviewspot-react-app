@@ -55,7 +55,7 @@ const CommentListItem = ({ comment }) => {
           <div className="d-flex justify-content-between">
             <Link
               className="comment-list-item"
-              to={`/user/${authorInfo.authorName}`}
+              to={`/user/${authorInfo.authorId}`}
             >
               <span className="text-muted me-1">Comment by</span>
               <span>{comment && authorInfo.authorName}</span>
