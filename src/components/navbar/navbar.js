@@ -7,21 +7,21 @@ import moment from "moment";
 import { login } from "../../actions/user-actions";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     // TODO: Fix this auto login using session - MOVE THIS
-    // const loggedInUntil = localStorage.getItem("loggedInUntil");
-    // const loggedIn = loggedInUntil && moment(loggedInUntil) >= moment();
-    // if (loggedIn) {
-    //   login(dispatch);
-    // }
-  }, []);
+    const loggedInUntil = localStorage.getItem("loggedInUntil");
+    const loggedIn = loggedInUntil && moment(loggedInUntil) >= moment();
+    if (loggedIn) {
+      login(dispatch);
+    }
+  }, [dispatch]);
 
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
   const moderator = userInfo.role === "moderator";
   const userId = userInfo._id;
 
-  const dispatch = useDispatch();
   const handleLogout = () => {
     logout(dispatch);
   };

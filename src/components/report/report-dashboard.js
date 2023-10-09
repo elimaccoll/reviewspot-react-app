@@ -17,7 +17,7 @@ const ReportDashboard = () => {
       isLoggedIn(dispatch).then((response) => {
         if (!response.loggedIn) noPermissionRedirect();
       }),
-    [userInfo.loggedIn]
+    [dispatch, userInfo.loggedIn]
   );
   useEffect(
     () =>
