@@ -23,7 +23,6 @@ const ReportListItem = ({ report }) => {
   }, []);
   const reportState = useSelector((state) => state.reports);
   const commentContent = report.commentContent;
-
   return (
     <li className="list-group-item">
       <div>Reporter ID: {report && report.submittedBy} </div>

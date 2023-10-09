@@ -21,7 +21,7 @@ const reportReducer = (state = [], action) => {
       };
       return state;
     case GET_REPORTED_COMMENT:
-      return;
+      return state;
     case REPORT_COMMENT:
       return action.report;
     case REPORT_REVIEW:

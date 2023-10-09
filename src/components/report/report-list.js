@@ -9,8 +9,8 @@ const ReportList = ({ reports }) => {
   return (
     <ul className="list-group">
       {reports.reports &&
-        reports.reports.map((report) => {
-          return <ReportListItem report={report} />;
+        reports.reports.map((report, ind) => {
+          return <ReportListItem report={report} key={ind} />;
         })}
     </ul>
   );
