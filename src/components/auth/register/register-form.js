@@ -18,20 +18,37 @@ const RegisterForm = () => {
     const toastOptions = {
       position: toast.POSITION.TOP_CENTER,
       pauseOnHover: false,
-      theme: "dark"
+      theme: "dark",
     };
+    // Auth requirements
     if (credentials.password !== credentials.verify_password) {
-      toast("Passwords do not match. Please ensure they are the same.", toastOptions);
+      toast(
+        "Passwords do not match. Please ensure they are the same.",
+        toastOptions
+      );
+      setCredentials({ ...credentials, password: "", verify_password: "" });
       return;
     }
-    register(dispatch, credentials.username, credentials.password)
-    .catch((error) => {
-      if (error.response.status < 500) {
-        toast("This username is either invalid or has already been taken. Please try again.", toastOptions);
-      } else {
-        toast("An internal server error has occurred. Please try again or contact a site contributor.", toastOptions);
+    if (credentials.password.length < 6) {
+      toast("Password must be at least 6 characters long.", toastOptions);
+      setCredentials({ ...credentials, password: "", verify_password: "" });
+      return;
+    }
+    register(dispatch, credentials.username, credentials.password).catch(
+      (error) => {
+        if (error.response.status < 500) {
+          toast(
+            "This username is either invalid or has already been taken. Please try again.",
+            toastOptions
+          );
+        } else {
+          toast(
+            "An internal server error has occurred. Please try again or contact a site contributor.",
+            toastOptions
+          );
+        }
       }
-    });
+    );
   };
 
   const userInfo = useSelector((state) => state.user);
