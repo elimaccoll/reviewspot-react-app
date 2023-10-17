@@ -78,7 +78,7 @@ const AlbumInfo = ({ album, numReviews, alreadyReviewed = null }) => {
           {WriteReviewButton()}
         </div>
       </div>
-      <div className="rounded user-review">
+      <div className={`rounded ${alreadyReviewed ? "d-inline" : "d-none"}`}>
         <ReviewList reviews={{ reviews: userReview }} />
       </div>
     </div>
