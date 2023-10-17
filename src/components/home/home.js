@@ -8,6 +8,8 @@ import { findPopularReviews } from "../../actions/reviews-actions";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { cookieTest } from "../../services/auth-services";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className="row d-none d-md-flex">
         <div className="col-12 col-md-8">
           <AlbumList albums={albums} />
         </div>
@@ -52,6 +54,26 @@ const Home = () => {
             <h4 className="text-center text-muted">No reviews to show.</h4>
           )}
         </div>
+      </div>
+      <div className="d-block d-md-none mt-2">
+        <Tabs
+          defaultActiveKey="albums"
+          id="uncontrolled-tab-example"
+          className=""
+        >
+          <Tab eventKey="albums" title="Albums">
+            <AlbumList albums={albums} />
+          </Tab>
+          <Tab eventKey="reviews" title="&#128293; Hottest Takes &#128293;">
+            <div className="mt-3">
+              {popularReviews && popularReviews.length > 0 ? (
+                <ReviewList reviews={{ reviews: popularReviews }} />
+              ) : (
+                <h4 className="text-center text-muted">No reviews to show.</h4>
+              )}
+            </div>
+          </Tab>
+        </Tabs>
       </div>
     </div>
   );
