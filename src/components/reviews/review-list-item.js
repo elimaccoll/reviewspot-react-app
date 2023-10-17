@@ -12,36 +12,31 @@ const ReviewListItem = ({ review }) => {
   // TODO: Do this differently
   // Conditionally render information displayed if NOT on album page
   const url = window.location.href;
-  const find = "album";
-  const onAlbumPage = url.match(find);
+  const onAlbumPage = url.match("album");
   const numComments = review && review.numComments;
 
-  // console.log(review);
   const goToUserProfile = () => {
     navigate(`/user/${authorInfo.authorId}`);
   };
 
   return (
     <li className="list-group-item">
-      <div className="row">
-        <div
-          className={`col-3 col-md-2 col-xl-1 justify-content-center align-items-center ${
-            !onAlbumPage ? "d-none" : "d-flex"
-          }`}
-        >
-          <img
-            src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${authorInfo.authorId}`}
-            className="rs-img-128 img-fluid rs-profile-pic"
-            alt="Avatar"
-            onClick={() => goToUserProfile()}
-          />
-        </div>
-        <div
-          className={`${!onAlbumPage ? "col-12" : "col-9 col-md-10 col-xl-11"}`}
-        >
+      {/* On album page */}
+      <div
+        className={`${
+          onAlbumPage ? "d-flex" : "d-none"
+        } align-items-center justify-content-start gap-3`}
+      >
+        <img
+          src={`https://api.dicebear.com/7.x/pixel-art/svg?seed=${authorInfo.authorId}`}
+          className="rs-img-128 img-fluid rs-profile-pic"
+          alt="Avatar"
+          onClick={() => goToUserProfile()}
+        />
+        <div>
           <div>
             <Link
-              className="review-list-item"
+              className="text-decoration-none"
               to={`/user/${authorInfo.authorId}`}
             >
               <span className="text-muted me-1">Review by</span>
@@ -51,22 +46,49 @@ const ReviewListItem = ({ review }) => {
               )}
             </Link>
           </div>
-          <Link
-            className="review-list-item text-white"
-            to={`/album/${albumId}/review/${review._id}`}
-          >
-            <div className={`${onAlbumPage ? "d-none" : "d-block"}`}>
-              {/* <Link className="text-white" to={`/album/${albumId}`}> */}
+          <RatingBar rating={review.rating.rating} />
+          <div>{review.content}</div>
+          <ReviewStats review={review} numComments={numComments} />
+          <div>
+            <Link className="" to={`/album/${albumId}/review/${review._id}`}>
+              Go to Review
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* On user page*/}
+      <div
+        className={`${
+          !onAlbumPage ? "d-flex" : "d-none"
+        } align-items-center justify-content-start gap-3`}
+      >
+        <div>
+          <div>
+            <Link
+              className="text-decoration-none"
+              to={`/user/${authorInfo.authorId}`}
+            >
+              <span className="text-muted me-1">Review by</span>
+              <span>{authorInfo.authorName}</span>
+              {authorInfo.authorRole === "moderator" && (
+                <span className="badge bg-primary me-1 ms-1">Moderator</span>
+              )}
+            </Link>
+          </div>
+          <div>
+            <Link className="text-decoration-none" to={`/album/${albumId}`}>
               <span className="text-muted">Album: </span>
               <span>{review && review.albumName}</span>
-              {/* </Link> */}
-            </div>
-
-            <RatingBar rating={review.rating.rating} />
-
-            <div>{review.content}</div>
-          </Link>
+            </Link>
+          </div>
+          <RatingBar rating={review.rating.rating} />
+          <div>{review.content}</div>
           <ReviewStats review={review} numComments={numComments} />
+          <div>
+            <Link className="" to={`/album/${albumId}/review/${review._id}`}>
+              Go to Review
+            </Link>
+          </div>
         </div>
       </div>
     </li>
