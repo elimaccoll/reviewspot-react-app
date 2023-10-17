@@ -25,54 +25,42 @@ const Navbar = () => {
   const handleLogout = () => {
     logout(dispatch);
   };
+
+  const renderReports = loggedIn && moderator ? "d-inline" : "d-none";
+  const renderProfile = loggedIn ? "d-inline" : "d-none";
+  const renderLogin = !loggedIn ? "d-inline" : "d-none";
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-light rounded">
-      <div className="container-fluid">
+      <div className="d-flex justify-content-between align-items-center w-100 px-3 gap-3">
         <Link className="navbar-brand text-black" to={`/`}>
           ReviewSpot
         </Link>
-
-        <ul className="navbar-nav me-auto">
-          <li className="nav-item">
-            <Link className="nav-link text-black active text-center" to={`/`}>
-              Home
-            </Link>
-          </li>
-          <li
-            className={`nav-item ${
-              loggedIn && moderator ? "d-inline" : "d-none"
-            }`}
+        <Link
+          className={`nav-link text-black active text-center ${renderReports}`}
+          to={`/reports/`}
+        >
+          Reports
+        </Link>
+        <div>
+          <SearchBar />
+        </div>
+        <div
+          className={`d-flex justify-content-center align-items-center gap-3 ${renderProfile}`}
+        >
+          <Link
+            className="text-black d-flex align-items-center text-decoration-none"
+            to={`/user/${userId}/`}
           >
-            <Link
-              className="nav-link text-black active text-center"
-              to={`/reports/`}
-            >
-              Reports
-            </Link>
-          </li>
-        </ul>
-        <SearchBar />
-        <ul className="navbar-nav d-flex justify-content-center align-items-center">
-          <li className={`nav-item ${loggedIn ? "d-block" : "d-none"}`}>
-            <Link
-              className="text-black nav-link d-flex align-items-center"
-              to={`/user/${userId}/`}
-            >
-              <i className="fa fa-user-circle fa-2x"></i>
-              <span className="ms-1">{userInfo.username}</span>
-            </Link>
-          </li>
-          <li className={`nav-item ${loggedIn ? "d-block" : "d-none"}`}>
-            <button className="btn btn-dark" onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
-          <li className={`nav-item ${loggedIn ? "d-none" : "d-block"}`}>
-            <a className="nav-link text-black" href="/login">
-              Login/Register
-            </a>
-          </li>
-        </ul>
+            <i className="fa fa-user-circle fa-2x"></i>
+            <span className="ms-1">{userInfo.username}</span>
+          </Link>
+          <button className="btn btn-dark" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+        <Link className={`text-black ${renderLogin}`} to={"/login"}>
+          Login/Register
+        </Link>
       </div>
     </nav>
   );
