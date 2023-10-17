@@ -32,6 +32,19 @@ const AlbumPage = () => {
       ? userAlreadyReviewedAlbum(reviews.reviews, userInfo._id)
       : false;
 
+  // Remove user review from other user review list
+  let otherReviews = reviews;
+  if (alreadyReviewed) {
+    const reviewsWithoutUserReview = reviews.reviews.filter(
+      (review) => review !== alreadyReviewed
+    );
+    otherReviews = {
+      ...reviews,
+      reviews: reviewsWithoutUserReview,
+      total: reviewsWithoutUserReview.length,
+    };
+  }
+
   return (
     <div>
       <AlbumInfo
@@ -39,7 +52,9 @@ const AlbumPage = () => {
         numReviews={numReviews}
         alreadyReviewed={alreadyReviewed}
       />
-      <ReviewList reviews={reviews} />
+      <div className="mt-2">
+        <ReviewList reviews={otherReviews} />
+      </div>
     </div>
   );
 };
