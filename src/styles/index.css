@@ -14,7 +14,7 @@
 }
 
 .rs-rating-bar {
-  width: 192px;
+  width: 150px;
 }
 
 .clickable {
@@ -33,4 +33,12 @@
 
 .rs-dark {
   color: black;
+}
+
+.font-responsive {
+  font-size: calc(15px + 1vw);
+}
+
+.user-review {
+  border: 2px solid black;
 }

@@ -28,7 +28,7 @@ const ReviewSpot = () => {
       <div className="mt-2">
         <Navbar />
       </div>
-      <div className="row mt-2">
+      <div className="row mb-3">
         <Outlet />
       </div>
       <ToastContainer />

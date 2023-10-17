@@ -17,7 +17,7 @@ const ReviewList = ({ reviews }) => {
   };
   return (
     <div>
-      <ul className="list-group mt-2">
+      <ul className="list-group">
         {reviewsList &&
           reviewsList.map((review, ind) => {
             return <ReviewListItem review={review} key={ind} />;

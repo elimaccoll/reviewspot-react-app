@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_BASE } from "./constants";
+
 export const findAlbum = async (albumId) => {
   const response = await axios.get(`${API_BASE}/album/${albumId}`);
   return response.data;

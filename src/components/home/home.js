@@ -35,14 +35,17 @@ const Home = () => {
     };
     toast(message, toastOptions);
   };
+
   return (
     <div>
       <div className="row">
-        <div className="col-12 col-lg-8">
+        <div className="col-12 col-md-8">
           <AlbumList albums={albums} />
         </div>
-        <div className="col-lg-4 mt-lg-0 mt-3">
-          <h3 className="text-center">&#128293; Hottest Takes &#128293;</h3>
+        <div className="col-4 mt-3 d-none d-md-block">
+          <h3 className="text-center font-responsive">
+            &#128293; Hottest Takes &#128293;
+          </h3>
           {popularReviews && popularReviews.length > 0 ? (
             <ReviewList reviews={{ reviews: popularReviews }} />
           ) : (

@@ -17,7 +17,7 @@ import RedirectPage from "./components/redirect/redirect";
 function App() {
   return (
     <Router>
-      <div className="container p-0">
+      <div className="container">
         <Routes>
           <Route path="/" exact={true} element={<ReviewSpot />}>
             <Route path="*" element={<RedirectPage />} />

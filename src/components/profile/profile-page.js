@@ -63,7 +63,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div
-          className={`d-flex justify-content-end ${
+          className={`d-flex justify-content-end mb-2 ${
             loggedIn && (owner || moderator) ? "d-flex" : "d-none"
           }`}
         >
