@@ -5,9 +5,13 @@ const RatingBar = ({ rating }) => {
     rating = 0.0001;
   }
   return (
-    <div className="d-flex align-items-center">
+    <div className="mb-1">
+      <div className={`${rating && rating >= 0 ? "d-block" : "d-none"}`}>
+        <span className="text-muted">Rating: </span>
+        {rating && rating.toFixed(0) / 10} / 10
+      </div>
       <div className={`${rating && rating ? "d-block" : "d-none"}`}>
-        <div className="rs-rating-bar me-2">
+        <div className="rs-rating-bar">
           <div className="progress">
             <div
               className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
@@ -19,9 +23,6 @@ const RatingBar = ({ rating }) => {
             ></div>
           </div>
         </div>
-      </div>
-      <div className={`${rating && rating >= 0 ? "d-block" : "d-none"}`}>
-        {rating && rating.toFixed(0) / 10} / 10
       </div>
     </div>
   );
