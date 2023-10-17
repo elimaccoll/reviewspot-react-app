@@ -6,10 +6,12 @@ import LoginModal from "../auth/login/login-modal";
 import { bannedRedirect } from "../helpers/auth";
 import { alreadyLikedByUser } from "../helpers/reviews";
 
-const ReviewStats = ({ review, numComments, linkComments = true }) => {
+const ReviewStats = ({ review, numComments }) => {
   const albumId = review ? review.albumId : null;
   const reviewId = review && review._id;
   const dispatch = useDispatch();
+
+  const linkComments = numComments !== 0;
 
   const userInfo = useSelector((state) => state.user);
   const loggedIn = userInfo.loggedIn;
@@ -56,7 +58,7 @@ const ReviewStats = ({ review, numComments, linkComments = true }) => {
       >
         <span>Comments: {numComments && numComments}</span>
       </Link>
-      <span className={`${linkComments ? "d-none" : "d-inline"}`}>
+      <span className={`${!linkComments ? "d-inline" : "d-none"}`}>
         Comments: {numComments && numComments}
       </span>
     </div>
